@@ -763,6 +763,24 @@ app.post('/api/reset-password', async (req, res) => {
   res.json({ token: makeToken(user), user: { id: user.id, email: user.email, name: user.name, is_premium: user.is_premium } });
 });
 
+app.delete('/api/account', authMiddleware, async (req, res) => {
+  const { password } = req.body || {};
+  const { data: user } = await supabase.from('users').select('password_hash').eq('id', req.user.id).maybeSingle();
+  if (!user) return res.status(404).json({ error: 'Usuário não encontrado.' });
+
+  const isGoogle = user.password_hash?.startsWith('google:');
+  if (!isGoogle) {
+    if (!password) return res.status(400).json({ error: 'Informe sua senha para confirmar.' });
+    const ok = await bcrypt.compare(password, user.password_hash);
+    if (!ok) return res.status(401).json({ error: 'Senha incorreta.' });
+  }
+
+  await supabase.from('usage').delete().eq('user_id', req.user.id);
+  const { error } = await supabase.from('users').delete().eq('id', req.user.id);
+  if (error) { console.error('[delete-account]', error); return res.status(500).json({ error: 'Erro ao excluir conta.' }); }
+  res.json({ ok: true });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Transcricao Universal rodando em http://localhost:" + PORT);

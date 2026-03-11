@@ -15,8 +15,8 @@
 :root{
   --bg:#ffffff;
   --bg2:#F9FAFB;
-  --accent:#06B6D4;
-  --accent-dark:#0891B2;
+  --accent:#C9921A;
+  --accent-dark:#A8780F;
   --text:#0F172A;
   --muted:#64748B;
   --border:#E2E8F0;
@@ -73,7 +73,7 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 
 .search-wrap{max-width:680px;margin:0 auto;padding:0 24px 0;width:100%}
 .search-box{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:100px;padding:6px 6px 6px 20px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
-.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(6,182,212,.12),var(--shadow)}
+.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,146,26,.12),var(--shadow)}
 .search-box input{flex:1;border:none;background:transparent;font-family:inherit;font-size:.9rem;color:var(--text);outline:none;min-width:0;padding:6px 0}
 .search-box input::placeholder{color:#94A3B8}
 .btn-go{background:var(--text);color:#fff;border:none;border-radius:100px;padding:10px 24px;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
@@ -88,14 +88,14 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .prog-sec{display:none;margin-top:14px}
 .steps{display:flex;flex-direction:column;gap:8px}
 .step{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:var(--bg2);border:1.5px solid transparent;transition:all .25s}
-.step.on{background:#ECFEFF;border-color:#A5F3FC}
+.step.on{background:#FFFBEB;border-color:#FDE68A}
 .step.done{background:#F0FDF4;border-color:#BBF7D0}
 .s-ico{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;border:1.5px solid var(--border)}
 .step.on .s-ico{border-color:var(--accent);color:var(--accent)}
 .step.done .s-ico{border-color:var(--green);color:var(--green)}
 .s-name{font-weight:600;font-size:.85rem}
 .s-sub{font-size:.72rem;color:var(--muted);margin-top:1px}
-.s-spin{width:13px;height:13px;border:2px solid #A5F3FC;border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+.s-spin{width:13px;height:13px;border:2px solid #FDE68A;border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .err-sec{display:none;margin-top:12px;padding:11px 14px;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:10px;align-items:center;justify-content:space-between;gap:12px}
@@ -107,7 +107,7 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .res-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:.2px}
 .badge-done{background:#DCFCE7;color:var(--green)}
-.badge-words{background:#ECFEFF;color:var(--accent-dark)}
+.badge-words{background:#FFFBEB;color:var(--accent-dark)}
 .badge-lang{background:#F1F5F9;color:var(--muted)}
 .res-actions{display:flex;gap:6px}
 .btn-sm{border:1.5px solid var(--border);background:#fff;color:var(--text);padding:5px 12px;border-radius:7px;font-family:inherit;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
@@ -152,7 +152,7 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:300;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .overlay.open{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}
 .modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.2);text-align:center;flex-shrink:0}
-.modal-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:#ECFEFF;color:var(--accent);border-radius:100px;padding:3px 10px;margin-bottom:14px}
+.modal-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:#FFFBEB;color:var(--accent);border-radius:100px;padding:3px 10px;margin-bottom:14px}
 .modal h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
 .modal-desc{color:var(--muted);font-size:.83rem;line-height:1.65;margin-bottom:18px}
 .modal-perks{text-align:left;background:var(--bg2);border-radius:10px;padding:14px 16px;margin-bottom:18px;border:1px solid var(--border)}
@@ -210,6 +210,8 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .pd-btn-out:hover{color:var(--red);border-color:var(--red)}
 .pd-btn-cancel{background:transparent;color:var(--red);border:1.5px solid #FCA5A5;font-size:.75rem}
 .pd-btn-cancel:hover{background:#FEE2E2;border-color:var(--red)}
+.pd-btn-delete{background:transparent;color:var(--muted);border:none;font-size:.72rem;text-decoration:underline;cursor:pointer;padding:4px 0;width:100%;text-align:center}
+.pd-btn-delete:hover{color:var(--red)}
 .pd-cancel-notice{font-size:.75rem;color:var(--muted);background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:9px 12px;line-height:1.5;margin-bottom:4px}
 .pd-cancel-notice strong{color:#92400E}
 
@@ -217,7 +219,7 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .promo-inner{max-width:820px;margin:0 auto;border-top:1px solid var(--border);padding-top:56px}
 .promo-inner{max-width:760px;margin:0 auto}
 .promo-top{text-align:center;margin-bottom:72px}
-.promo-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#ECFEFF;color:var(--accent-dark);border-radius:100px;padding:4px 12px;margin-bottom:28px}
+.promo-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#FFFBEB;color:var(--accent-dark);border-radius:100px;padding:4px 12px;margin-bottom:28px}
 .promo-h{font-family:'Agbalumo',system-ui;font-weight:400;font-size:clamp(2rem,5vw,2.6rem);line-height:1.15;margin-bottom:10px;letter-spacing:-.3px;color:var(--text)}
 .promo-h span{color:var(--accent)}
 .promo-sub{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:460px;margin:0 auto}
@@ -279,7 +281,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 
   /* ── Search box: stack vertically on mobile ── */
   .search-wrap{padding:0 16px}
-  .search-box{flex-wrap:wrap;padding:12px 14px;border-radius:16px;gap:0;box-shadow:0 2px 16px rgba(6,182,212,.12);border-color:rgba(6,182,212,.25);align-items:center}
+  .search-box{flex-wrap:wrap;padding:12px 14px;border-radius:16px;gap:0;box-shadow:0 2px 16px rgba(201,146,26,.12);border-color:rgba(201,146,26,.25);align-items:center}
   .search-box input{font-size:16px;padding:8px 0;flex:1;min-width:0}
   .btn-paste{border-left:1px solid var(--border);border-top:none;margin-left:4px;padding:8px 10px;font-size:.82rem;flex-shrink:0}
   .btn-go{flex-basis:100%;justify-content:center;padding:14px;font-size:.95rem;font-weight:700;border-radius:12px;margin-top:8px;min-height:48px;letter-spacing:.2px}
@@ -363,16 +365,16 @@ html[data-theme="dark"]{
 }
 [data-theme="dark"] nav,[data-theme="dark"] nav.scrolled{background:var(--bg2);border-bottom-color:var(--border);box-shadow:0 1px 0 rgba(0,0,0,.3)}
 [data-theme="dark"] .search-box{background:var(--bg2);border-color:var(--border)}
-[data-theme="dark"] .search-box:focus-within{box-shadow:0 0 0 3px rgba(34,211,238,.2),var(--shadow)}
-[data-theme="dark"] .hero-screen{background:linear-gradient(170deg,rgba(6,182,212,.05) 0%,var(--bg) 60%)}
+[data-theme="dark"] .search-box:focus-within{box-shadow:0 0 0 3px rgba(201,146,26,.2),var(--shadow)}
+[data-theme="dark"] .hero-screen{background:linear-gradient(170deg,rgba(201,146,26,.05) 0%,var(--bg) 60%)}
 [data-theme="dark"] .s-ico,[data-theme="dark"] .how-num{background:var(--bg2);border-color:var(--border)}
-[data-theme="dark"] .step.on{background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.2)}
+[data-theme="dark"] .step.on{background:rgba(201,146,26,.08);border-color:rgba(201,146,26,.2)}
 [data-theme="dark"] .step.done{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.15)}
 [data-theme="dark"] .res-sec{background:var(--bg2);border-color:var(--border)}
 [data-theme="dark"] .btn-sm{background:var(--bg);border-color:var(--border);color:var(--text)}
 [data-theme="dark"] .modal{background:var(--bg2);box-shadow:0 24px 80px rgba(0,0,0,.5)}
 [data-theme="dark"] .modal-perks{background:var(--bg);border-color:var(--border)}
-[data-theme="dark"] .modal-tag,[data-theme="dark"] .promo-eyebrow{background:rgba(6,182,212,.12)}
+[data-theme="dark"] .modal-tag,[data-theme="dark"] .promo-eyebrow{background:rgba(201,146,26,.12)}
 [data-theme="dark"] .profile-drop{background:var(--bg2);border-color:var(--border);box-shadow:0 8px 40px rgba(0,0,0,.4)}
 [data-theme="dark"] .pd-header{border-bottom-color:var(--border)}
 [data-theme="dark"] .pd-badge.free{background:var(--bg);color:var(--muted)}
@@ -394,7 +396,7 @@ html[data-theme="dark"]{
 [data-theme="dark"] .btn-close-modal{border-color:var(--border)}
 [data-theme="dark"] footer{border-top-color:var(--border)}
 [data-theme="dark"] .badge-done{background:rgba(34,197,94,.1);color:var(--green)}
-[data-theme="dark"] .badge-words{background:rgba(6,182,212,.1);color:var(--accent)}
+[data-theme="dark"] .badge-words{background:rgba(201,146,26,.1);color:var(--accent)}
 [data-theme="dark"] .badge-lang{background:var(--bg);color:var(--muted)}
 [data-theme="dark"] .btn-go{background:#fff;color:#0F172A}
 [data-theme="dark"] .btn-go:hover:not(:disabled){background:#e2e8f0;color:#0F172A}
@@ -576,9 +578,9 @@ html[data-theme="dark"]{
       <div class="promo-perk"><strong>Acesso vital&iacute;cio</strong>Pague uma &uacute;nica vez e tenha Premium para sempre. Sem renova&ccedil;&atilde;o.</div>
     </div>
     <div class="promo-bottom">
-      <div class="promo-price-row"><span class="promo-price">R$0,05</span><span class="promo-period">pagamento &uacute;nico</span></div>
-      <p class="promo-fine">Pagamento &uacute;nico via PIX &mdash; <strong style="color:var(--accent)">R$0,05 (teste)</strong></p>
-      <button class="promo-cta" onclick="openPremium()">Comprar Premium &mdash; R$0,05</button>
+      <div class="promo-price-row"><span class="promo-price">R$5,00</span><span class="promo-period">pagamento &uacute;nico</span></div>
+      <p class="promo-fine">Pagamento &uacute;nico via PIX &mdash; <strong style="color:var(--accent)">sem mensalidade</strong></p>
+      <button class="promo-cta" onclick="openPremium()">Comprar Premium &mdash; R$5,00</button>
     </div>
   </div>
 </section>
@@ -596,8 +598,8 @@ html[data-theme="dark"]{
         <div class="modal-perk"><span class="modal-perk-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>100 transcri&ccedil;&otilde;es por dia</div>
         <div class="modal-perk"><span class="modal-perk-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>Acesso vital&iacute;cio &mdash; para sempre</div>
       </div>
-      <div class="modal-price">R$0,05</div>
-      <div class="modal-price-sub">pagamento &uacute;nico via PIX <span style="color:var(--accent);font-weight:600">(TESTE)</span></div>
+      <div class="modal-price">R$5,00</div>
+      <div class="modal-price-sub">pagamento &uacute;nico via PIX &mdash; sem mensalidade</div>
       <button class="btn-pix" onclick="showPixForm()" style="background:#00B37E">Pagar com PIX</button>
       <button class="btn-close-modal" style="margin-top:8px" onclick="closeModal()">Agora n&atilde;o</button>
     </div>
@@ -683,6 +685,24 @@ html[data-theme="dark"]{
     <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:8px;color:var(--text)">Erro ao cancelar</h3>
     <p id="cc-err-msg" style="color:var(--muted);font-size:.875rem;margin-bottom:28px">Tente novamente.</p>
     <button onclick="closeCancelOverlay()" style="width:100%;padding:12px;background:var(--text);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer">Fechar</button>
+  </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div id="delete-overlay" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(15,23,42,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px">
+  <div id="delete-box" style="background:#fff;border-radius:20px;padding:36px 32px;max-width:400px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.25);text-align:center">
+    <div style="width:58px;height:58px;border-radius:50%;background:#FEE2E2;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem">&#9888;</div>
+    <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:10px;color:var(--text)">Excluir conta?</h3>
+    <p style="color:var(--muted);font-size:.875rem;line-height:1.7;margin-bottom:20px">Esta a&ccedil;&atilde;o &eacute; <strong>irrevers&iacute;vel</strong>. Todos os seus dados ser&atilde;o apagados permanentemente.</p>
+    <div id="delete-pw-wrap" style="margin-bottom:16px;text-align:left">
+      <label style="font-size:.78rem;font-weight:600;color:var(--muted);display:block;margin-bottom:6px">Confirme sua senha</label>
+      <input id="delete-pw-input" type="password" placeholder="Sua senha" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;outline:none;color:var(--text);background:var(--bg)" oninput="document.getElementById('delete-err').textContent=''"/>
+    </div>
+    <p id="delete-err" style="color:#DC2626;font-size:.8rem;margin-bottom:12px;min-height:18px"></p>
+    <div style="display:flex;gap:10px">
+      <button onclick="closeDeleteAccount()" style="flex:1;padding:12px;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;color:var(--text)">Cancelar</button>
+      <button onclick="confirmDeleteAccount()" id="delete-confirm-btn" style="flex:1;padding:12px;border:none;border-radius:10px;background:#DC2626;color:#fff;font-family:inherit;font-size:.875rem;font-weight:700;cursor:pointer">Excluir</button>
+    </div>
   </div>
 </div>
 
@@ -870,6 +890,7 @@ function renderProfileDrop(user) {
       '<div class="pd-btns">' +
         statusBlock +
         '<button class="pd-btn pd-btn-out" onclick="logout()">Sair da conta</button>' +
+        '<button class="pd-btn-delete" onclick="openDeleteAccount()">Excluir minha conta</button>' +
       '</div>' +
     '</div>';
 }
@@ -910,6 +931,50 @@ let _cancelConfirmOk = null;
 function closeCancelOverlay() {
   document.getElementById('cancel-overlay').style.display = 'none';
   _cancelConfirmOk = null;
+}
+
+function openDeleteAccount() {
+  document.getElementById('delete-pw-input').value = '';
+  document.getElementById('delete-err').textContent = '';
+  document.getElementById('delete-confirm-btn').disabled = false;
+  document.getElementById('delete-confirm-btn').textContent = 'Excluir';
+  document.getElementById('delete-overlay').style.display = 'flex';
+  const pd = document.getElementById('profile-drop');
+  if (pd) pd.style.display = 'none';
+}
+
+function closeDeleteAccount() {
+  document.getElementById('delete-overlay').style.display = 'none';
+}
+
+async function confirmDeleteAccount() {
+  const password = document.getElementById('delete-pw-input').value.trim();
+  const errEl = document.getElementById('delete-err');
+  const btn = document.getElementById('delete-confirm-btn');
+  errEl.textContent = '';
+  if (!password) { errEl.textContent = 'Digite sua senha para confirmar.'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Excluindo...';
+  try {
+    const r = await fetch(API + '/api/account', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('tu_token') },
+      body: JSON.stringify({ password })
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      btn.disabled = false;
+      btn.textContent = 'Excluir';
+      errEl.textContent = d.error || 'Erro ao excluir conta.';
+      return;
+    }
+    ['tu_user','tu_token','tu_premium','tu_usage','tu_premium_until','tu_sub_cancelled'].forEach(k => localStorage.removeItem(k));
+    window.location.href = 'login.html';
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Excluir';
+    errEl.textContent = 'Erro de conex\u00e3o. Tente novamente.';
+  }
 }
 
 function _cancelShowBox(which) {
