@@ -210,8 +210,6 @@ nav.scrolled{background:#fff;border-bottom-color:var(--border)}
 .pd-btn-out:hover{color:var(--red);border-color:var(--red)}
 .pd-btn-cancel{background:transparent;color:var(--red);border:1.5px solid #FCA5A5;font-size:.75rem}
 .pd-btn-cancel:hover{background:#FEE2E2;border-color:var(--red)}
-.pd-btn-delete{background:transparent;color:var(--muted);border:none;font-size:.72rem;text-decoration:underline;cursor:pointer;padding:4px 0;width:100%;text-align:center}
-.pd-btn-delete:hover{color:var(--red)}
 .pd-cancel-notice{font-size:.75rem;color:var(--muted);background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:9px 12px;line-height:1.5;margin-bottom:4px}
 .pd-cancel-notice strong{color:#92400E}
 
@@ -383,15 +381,7 @@ html[data-theme="dark"]{
 [data-theme="dark"] .pix-code-box{background:var(--bg);border-color:var(--border);color:var(--text)}
 [data-theme="dark"] .pix-notice{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.12)}
 [data-theme="dark"] .pix-notice strong{color:var(--gold)}
-[data-theme="dark"] .del-box{background:var(--bg2);box-shadow:0 32px 80px rgba(0,0,0,.6)}
-[data-theme="dark"] .del-icon-wrap{background:rgba(239,68,68,.15)}
-[data-theme="dark"] .del-title{color:var(--text)}
-[data-theme="dark"] .del-desc{color:var(--muted)}
-[data-theme="dark"] .del-pw-label{color:var(--muted)}
-[data-theme="dark"] .del-pw-input{background:var(--bg);border-color:var(--border);color:var(--text)}
-[data-theme="dark"] .del-pw-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.18)}
-[data-theme="dark"] .del-btn-cancel{background:var(--bg);border-color:var(--border);color:var(--text)}
-[data-theme="dark"] .del-btn-cancel:hover{background:var(--border)}
+
 [data-theme="dark"] .err-sec{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.15)}
 [data-theme="dark"] .limit-wall{background:var(--bg2);border-color:var(--border)}
 [data-theme="dark"] .pbadge{background:var(--bg2);border-color:var(--border)}
@@ -697,46 +687,6 @@ html[data-theme="dark"]{
   </div>
 </div>
 
-<!-- Delete Account Modal -->
-<style>
-.del-overlay{position:fixed;inset:0;z-index:600;background:rgba(5,10,25,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px;animation:delFadeIn .18s ease}
-@keyframes delFadeIn{from{opacity:0}to{opacity:1}}
-.del-box{background:#fff;border-radius:24px;padding:40px 36px 36px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.18);text-align:center;animation:delSlideUp .22s cubic-bezier(.34,1.56,.64,1)}
-@keyframes delSlideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-.del-icon-wrap{width:64px;height:64px;border-radius:50%;background:#FEF2F2;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.del-icon-wrap svg{width:28px;height:28px;stroke:#DC2626;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.del-title{font-size:1.15rem;font-weight:800;color:#0F172A;margin-bottom:10px;letter-spacing:-.02em}
-.del-desc{color:#64748B;font-size:.875rem;line-height:1.7;margin-bottom:24px}
-.del-desc strong{color:#DC2626}
-.del-pw-label{font-size:.75rem;font-weight:700;color:#64748B;display:block;margin-bottom:7px;text-align:left;letter-spacing:.04em;text-transform:uppercase}
-.del-pw-input{width:100%;padding:11px 14px;border:1.5px solid #E2E8F0;border-radius:12px;font-family:inherit;font-size:.9rem;outline:none;color:#0F172A;background:#F8FAFC;transition:border-color .15s,box-shadow .15s;margin-bottom:6px}
-.del-pw-input:focus{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.12);background:#fff}
-.del-err{color:#DC2626;font-size:.78rem;min-height:20px;margin-bottom:14px;text-align:left;font-weight:500}
-.del-actions{display:flex;gap:10px;margin-top:4px}
-.del-btn-cancel{flex:1;padding:12px 16px;border:1.5px solid #E2E8F0;border-radius:12px;background:#fff;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;color:#0F172A;transition:background .15s,border-color .15s}
-.del-btn-cancel:hover{background:#F1F5F9;border-color:#CBD5E1}
-.del-btn-confirm{flex:1;padding:12px 16px;border:none;border-radius:12px;background:linear-gradient(135deg,#DC2626,#B91C1C);color:#fff;font-family:inherit;font-size:.875rem;font-weight:700;cursor:pointer;transition:opacity .15s,transform .1s;box-shadow:0 2px 8px rgba(220,38,38,.35)}
-.del-btn-confirm:hover{opacity:.9}
-.del-btn-confirm:active{transform:scale(.97)}
-.del-btn-confirm:disabled{opacity:.55;cursor:not-allowed;transform:none}
-</style>
-
-<div id="delete-overlay" class="del-overlay">
-  <div class="del-box">
-    <div class="del-icon-wrap">
-      <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-    </div>
-    <h3 class="del-title">Excluir conta?</h3>
-    <p class="del-desc">Esta a&ccedil;&atilde;o &eacute; <strong>irrevers&iacute;vel</strong>.<br/>Todos os seus dados ser&atilde;o apagados permanentemente.</p>
-    <label class="del-pw-label" for="delete-pw-input">Confirme sua senha</label>
-    <input id="delete-pw-input" class="del-pw-input" type="password" placeholder="Digite sua senha" autocomplete="current-password" oninput="document.getElementById('delete-err').textContent=''" />
-    <p id="delete-err" class="del-err"></p>
-    <div class="del-actions">
-      <button class="del-btn-cancel" onclick="closeDeleteAccount()">Cancelar</button>
-      <button class="del-btn-confirm" id="delete-confirm-btn" onclick="confirmDeleteAccount()">Excluir conta</button>
-    </div>
-  </div>
-</div>
 
 <footer>
   <div class="footer-logo">Transcri&ccedil;&atilde;o <em>Universal</em></div>
@@ -922,7 +872,6 @@ function renderProfileDrop(user) {
       '<div class="pd-btns">' +
         statusBlock +
         '<button class="pd-btn pd-btn-out" onclick="logout()">Sair da conta</button>' +
-        '<button class="pd-btn-delete" onclick="openDeleteAccount()">Excluir minha conta</button>' +
       '</div>' +
     '</div>';
 }
@@ -965,49 +914,6 @@ function closeCancelOverlay() {
   _cancelConfirmOk = null;
 }
 
-function openDeleteAccount() {
-  document.getElementById('delete-pw-input').value = '';
-  document.getElementById('delete-err').textContent = '';
-  document.getElementById('delete-confirm-btn').disabled = false;
-  document.getElementById('delete-confirm-btn').textContent = 'Excluir conta';
-  document.getElementById('delete-overlay').style.display = 'flex';
-  const pd = document.getElementById('profile-drop');
-  if (pd) pd.style.display = 'none';
-}
-
-function closeDeleteAccount() {
-  document.getElementById('delete-overlay').style.display = 'none';
-}
-
-async function confirmDeleteAccount() {
-  const password = document.getElementById('delete-pw-input').value.trim();
-  const errEl = document.getElementById('delete-err');
-  const btn = document.getElementById('delete-confirm-btn');
-  errEl.textContent = '';
-  if (!password) { errEl.textContent = 'Digite sua senha para confirmar.'; return; }
-  btn.disabled = true;
-  btn.textContent = 'Excluindo...';
-  try {
-    const r = await fetch(API + '/api/account', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('tu_token') },
-      body: JSON.stringify({ password })
-    });
-    const d = await r.json();
-    if (!r.ok) {
-      btn.disabled = false;
-      btn.textContent = 'Excluir';
-      errEl.textContent = d.error || 'Erro ao excluir conta.';
-      return;
-    }
-    ['tu_user','tu_token','tu_premium','tu_usage','tu_premium_until','tu_sub_cancelled'].forEach(k => localStorage.removeItem(k));
-    window.location.href = 'login.html';
-  } catch {
-    btn.disabled = false;
-    btn.textContent = 'Excluir';
-    errEl.textContent = 'Erro de conex\u00e3o. Tente novamente.';
-  }
-}
 
 function _cancelShowBox(which) {
   ['confirm','loading','done','err'].forEach(s => {
