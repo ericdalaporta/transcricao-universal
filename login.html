@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Entrar &mdash; Transcri&ccedil;&atilde;o Universal</title>
+<script>(function(){var t=localStorage.getItem('tu_theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#F9FAFB;--accent:#06B6D4;--accent-dark:#0891B2;
+  --text:#0F172A;--muted:#64748B;--border:#E2E8F0;--green:#16A34A;--red:#DC2626;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;font-size:15px;display:flex;flex-direction:column}
+nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(0,0,0,.05);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Agbalumo',system-ui;font-weight:400;font-size:1.25rem;letter-spacing:0;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
+.nav-logo em{font-style:normal;color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:color .15s}
+.nav-link:hover{color:var(--text)}
+.btn-nav-login{background:transparent;color:var(--text);border:1.5px solid var(--border);border-radius:8px;padding:6px 16px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-nav-login:hover{border-color:var(--text)}
+.btn-nav-premium{background:var(--text);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-nav-premium:hover{background:#1E293B}
+.nav-user{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;color:var(--muted)}
+.nav-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0}
+.center{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.box{width:100%;max-width:400px;background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:40px 36px;box-shadow:0 8px 40px rgba(15,23,42,.11)}
+.box-title{font-size:1.35rem;font-weight:800;letter-spacing:-.5px;text-align:center;margin-bottom:6px;color:var(--text)}
+.box-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:28px;line-height:1.5}
+.btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:1.5px solid var(--border);background:#fff;color:var(--text);border-radius:10px;padding:11px 16px;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:20px}
+.btn-google:hover{border-color:#ccc;background:var(--bg2)}
+.divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.divider span{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.tabs-auth{display:flex;border-bottom:1px solid var(--border);margin-bottom:22px}
+.tab-auth{flex:1;text-align:center;padding:10px;font-size:.875rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px}
+.tab-auth.on{color:var(--accent);border-bottom-color:var(--accent)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:5px}
+.inp-wrap{position:relative;display:flex;align-items:center}
+.inp-wrap svg{position:absolute;left:12px;color:#9CA3AF;pointer-events:none}
+.inp-wrap input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px 10px 36px;font-family:inherit;font-size:.875rem;color:var(--text);outline:none;transition:border-color .2s;background:#fff}
+.inp-wrap input:focus{border-color:var(--accent)}
+.forgot-link{display:block;text-align:right;font-size:.75rem;color:var(--muted);text-decoration:none;margin-top:-8px;margin-bottom:12px;cursor:pointer}
+.forgot-link:hover{color:var(--accent)}
+.btn-submit{width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{background:var(--accent-dark)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+.form-footer{text-align:center;margin-top:18px;font-size:.82rem;color:var(--muted)}
+.form-footer a{color:var(--accent);text-decoration:none;font-weight:600}
+.form-footer a:hover{text-decoration:underline}
+.err{background:#FEF2F2;border:1px solid #FCA5A5;border-radius:8px;padding:10px 14px;font-size:.82rem;color:var(--red);margin-bottom:14px;display:none;line-height:1.5}
+.ok-msg{background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#15803D;margin-bottom:14px;display:none}
+@media(max-width:500px){
+  .box{padding:24px 14px;border-radius:14px}
+  nav{padding:0 14px;height:50px}
+  .center{padding:16px 10px}
+  .box-title{font-size:1.1rem}
+  .inp-wrap input{font-size:16px!important}  /* prevent iOS zoom */
+  .btn-submit{font-size:.875rem;padding:12px}
+  .btn-google{font-size:.8rem;padding:10px 12px}
+  .box-sub{font-size:.8rem}
+  .tab-auth{font-size:.82rem;padding:8px 4px}
+  .field label{font-size:.75rem}
+}
+/* ── Dark Mode ── */
+html[data-theme="dark"]{
+  --bg:#0B1120;--bg2:#131B2E;--accent:#ffffff;--accent-dark:#e2e8f0;
+  --text:#E2E8F0;--muted:#94A3B8;--border:#1E293B;
+  --green:#22C55E;--red:#DC2626;
+  color-scheme:dark;
+}
+[data-theme="dark"] body{background:var(--bg2)}
+[data-theme="dark"] nav{background:var(--bg);border-bottom-color:var(--border);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+[data-theme="dark"] .box{background:var(--bg);border-color:var(--border);box-shadow:0 8px 40px rgba(0,0,0,.3)}
+[data-theme="dark"] .inp-wrap input{background:var(--bg2);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .btn-google{background:var(--bg2);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .btn-google:hover{background:var(--bg);border-color:#475569}
+[data-theme="dark"] .divider::before,[data-theme="dark"] .divider::after{background:var(--border)}
+[data-theme="dark"] .tab-auth{color:var(--muted)}
+[data-theme="dark"] .tab-auth.on{color:var(--accent);border-bottom-color:var(--accent)}
+[data-theme="dark"] .tabs-auth{border-bottom-color:var(--border)}
+[data-theme="dark"] .err{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+[data-theme="dark"] .ok-msg{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.15)}
+[data-theme="dark"] .btn-nav-premium{background:#06B6D4}
+[data-theme="dark"] .btn-submit{background:#fff;color:#0F172A}
+[data-theme="dark"] .btn-submit:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] #forgot-devlink{background:rgba(34,197,94,.06)!important;border-color:rgba(34,197,94,.15)!important}
+.theme-toggle{background:none;border:1.5px solid var(--border);width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--muted);padding:0;line-height:1}
+.theme-toggle:hover{border-color:var(--text);color:var(--text)}
+.theme-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">
+    Transcri&ccedil;&atilde;o<em>Universal</em>
+  </a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="nav-right" id="nav-right">
+      <button class="btn-nav-premium" onclick="window.location.href='/?premium=1'">Seja Premium</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"></button>
+  </div>
+</nav>
+
+<div class="center">
+  <div class="box">
+    <h1 class="box-title" id="box-title">Entrar na sua conta</h1>
+    <p class="box-sub" id="box-sub">Acesse 3 transcri&ccedil;&otilde;es gratuitas por dia ou compre o <strong>Premium</strong> &mdash; acesso vital&iacute;cio</p>
+
+    <button class="btn-google" id="btn-google" onclick="loginGoogle()">
+      <svg width="18" height="18" viewBox="0 0 48 48">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+      </svg>
+      Continuar com Google
+    </button>
+
+    <div class="divider" id="divider"><span>ou use seu e-mail</span></div>
+
+    <div class="tabs-auth" id="tabs-auth">
+      <div class="tab-auth on" id="tab-login" onclick="switchAuth('login')">Entrar</div>
+      <div class="tab-auth" id="tab-signup" onclick="switchAuth('signup')">Criar conta</div>
+    </div>
+
+    <div id="err-auth" class="err"></div>
+    <div id="ok-auth" class="ok-msg"></div>
+
+    <div id="form-login">
+      <div class="field">
+        <label>E-mail</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitLogin()"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="login-pass" placeholder="Sua senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitLogin()"/>
+        </div>
+      </div>
+      <a class="forgot-link" onclick="switchAuth('forgot');return false" href="#">Esqueceu a senha?</a>
+      <button class="btn-submit" id="btn-login" onclick="submitLogin()">Entrar &rarr;</button>
+    </div>
+
+    <div id="form-signup" style="display:none">
+      <div class="field">
+        <label>Nome</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <input type="text" id="signup-name" placeholder="Seu nome" autocomplete="name" onkeydown="if(event.key==='Enter')submitSignup()"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          <input type="email" id="signup-email" placeholder="seu@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitSignup()"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Senha <span style="color:var(--muted);font-weight:400">(m&iacute;n. 6 caracteres)</span></label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="signup-pass" placeholder="Crie uma senha" autocomplete="new-password" onkeydown="if(event.key==='Enter')submitSignup()"/>
+        </div>
+      </div>
+      <button class="btn-submit" id="btn-signup" onclick="submitSignup()">Criar conta &rarr;</button>
+    </div>
+
+    <p class="form-footer" id="form-switch-txt">
+      N&atilde;o tem conta? <a href="#" onclick="switchAuth('signup');return false">Criar conta gr&aacute;tis</a>
+    </p>
+
+    <!-- Forgot password form -->
+    <div id="form-forgot" style="display:none">
+      <div class="field">
+        <label>Seu e-mail</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          <input type="email" id="forgot-email" placeholder="seu@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')submitForgot()"/>
+        </div>
+      </div>
+      <button class="btn-submit" id="btn-forgot" onclick="submitForgot()">Enviar instru&ccedil;&otilde;es &rarr;</button>
+      <div id="forgot-devlink" style="display:none;margin-top:14px;background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;padding:12px 14px;font-size:.82rem">
+        <p style="color:#15803D;font-weight:600;margin-bottom:6px">&#x1F4AC; Link de recupera&ccedil;&atilde;o (modo dev):</p>
+        <a id="forgot-devlink-a" href="#" style="color:var(--accent);word-break:break-all"></a>
+      </div>
+    </div>
+
+    <!-- Reset password form (shown when ?reset= param in URL) -->
+    <div id="form-reset" style="display:none">
+      <div class="field">
+        <label>Nova senha</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="reset-pass" placeholder="M&iacute;n. 6 caracteres" autocomplete="new-password" onkeydown="if(event.key==='Enter')submitReset()"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Confirmar senha</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="reset-pass2" placeholder="Confirme a senha" autocomplete="new-password" onkeydown="if(event.key==='Enter')submitReset()"/>
+        </div>
+      </div>
+      <button class="btn-submit" id="btn-reset" onclick="submitReset()">Redefinir senha &rarr;</button>
+    </div>
+
+    <!-- Email verification code form -->
+    <div id="form-verify" style="display:none">
+      <p style="text-align:center;font-size:.85rem;color:var(--muted);margin-bottom:16px">Enviamos um c&oacute;digo de 6 d&iacute;gitos para <strong id="verify-email-display"></strong></p>
+      <div id="verify-dev-code" style="display:none;margin-bottom:14px;background:#F0FDF4;border:1px solid #86EFAC;border-radius:8px;padding:10px 14px;font-size:.82rem;text-align:center">
+        <span style="color:#15803D;font-weight:600">C&oacute;digo (modo dev):</span> <strong id="verify-dev-code-value" style="letter-spacing:4px;font-size:1.1rem"></strong>
+      </div>
+      <div class="field">
+        <label>C&oacute;digo de verifica&ccedil;&atilde;o</label>
+        <div class="inp-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="text" id="verify-code" placeholder="000000" maxlength="6" autocomplete="one-time-code" inputmode="numeric" style="letter-spacing:6px;font-size:1.2rem;text-align:center" onkeydown="if(event.key==='Enter')submitVerify()"/>
+        </div>
+      </div>
+      <button class="btn-submit" id="btn-verify" onclick="submitVerify()">Verificar &rarr;</button>
+      <p style="text-align:center;margin-top:12px;font-size:.78rem;color:var(--muted)">N&atilde;o recebeu? <a href="#" onclick="resendCode();return false" style="color:var(--accent);font-weight:600">Reenviar c&oacute;digo</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// URL da API — funciona tanto no Live Server (5500) quanto direto no servidor (3000)
+const _isLocal = ['localhost','127.0.0.1'].includes(location.hostname);
+const API = (_isLocal && location.port !== '3000') ? 'http://localhost:3000' : '';
+
+// Cliente Supabase para Google OAuth — credenciais carregadas do servidor
+let sbClient = null;
+
+async function initSupabase() {
+  try {
+    const r = await fetch(API + '/api/config');
+    const cfg = await r.json();
+    if (!cfg.supabaseUrl || !cfg.supabaseAnonKey ||
+        cfg.supabaseUrl.includes('SEU_PROJECT_ID') ||
+        cfg.supabaseAnonKey.length < 10) {
+      return false; // credenciais não configuradas
+    }
+    sbClient = supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+    return true;
+  } catch { return false; }
+}
+
+// Verificar se veio de um link de reset de senha (?reset=...)
+(function checkResetParam() {
+  const resetToken = new URLSearchParams(location.search).get('reset');
+  if (!resetToken) return;
+  // Hide normal login UI, show reset form
+  document.getElementById('btn-google').style.display  = 'none';
+  document.getElementById('divider').style.display     = 'none';
+  document.getElementById('tabs-auth').style.display   = 'none';
+  document.getElementById('form-login').style.display  = 'none';
+  document.getElementById('form-signup').style.display = 'none';
+  document.getElementById('form-forgot').style.display = 'none';
+  document.getElementById('form-reset').style.display  = 'block';
+  document.getElementById('form-switch-txt').innerHTML = '<a href="/login.html" style="color:var(--accent)">Voltar para o login</a>';
+  document.getElementById('box-title').textContent = 'Redefinir senha';
+  document.getElementById('box-sub').textContent   = 'Digite sua nova senha abaixo.';
+})();
+
+// Checar se voltou de um redirect do Google OAuth
+(async function checkOAuth() {
+  const ok = await initSupabase();
+
+  // Se veio de um logout, limpa a sessao Supabase e remove o param da URL
+  if (new URLSearchParams(location.search).get('lo') === '1') {
+    if (ok && sbClient) await sbClient.auth.signOut();
+    history.replaceState(null, '', '/login.html');
+    return;
+  }
+
+  if (!ok || !sbClient) return; // Supabase não configurado — login normal funciona normalmente
+
+  // Supabase processa o hash #access_token=... da URL automaticamente
+  const { data: { session } } = await sbClient.auth.getSession();
+  if (!session) {
+    if (location.hash && location.hash.includes('access_token')) {
+      showErr('Falha ao obter sessão do Google. Verifique se o Google OAuth está ativado no Supabase e se a URL de redirect está na lista de URLs permitidas.');
+    }
+    return;
+  }
+
+  // Mostrar loading enquanto finaliza o login
+  const btn = document.getElementById('btn-google');
+  if (btn) { btn.disabled = true; btn.textContent = 'Finalizando login...'; }
+
+  // Trocar token do Supabase pelo nosso JWT
+  try {
+    const r = await fetch(API + '/api/google-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ access_token: session.access_token })
+    });
+    const d = await r.json();
+    if (d.token) { saveUserAndRedirect(d.token, d.user); return; }
+    showErr(d.error || 'Erro ao autenticar com Google. Tente novamente.');
+  } catch {
+    showErr('Erro de conexão com o servidor ao finalizar login com Google. Verifique se o servidor está rodando.');
+  }
+  await sbClient.auth.signOut();
+  if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Continuar com Google'; }
+})();
+
+// Verificar se ja esta logado com nosso JWT
+(function() {
+  const token = localStorage.getItem('tu_token');
+  const raw   = localStorage.getItem('tu_user');
+  if (!token || !raw) return;
+  try {
+    const u  = JSON.parse(raw);
+    const init = (u.name || u.email || 'U')[0].toUpperCase();
+    // Atualiza nav
+    document.getElementById('nav-right').innerHTML =
+      '<span class="nav-user"><div class="nav-avatar">'+init+'</div>'+(u.name||u.email)+'</span>' +
+      '<a class="nav-link" href="#" onclick="sair();return false" style="color:var(--red)">Sair</a>';
+    // Adapta a caixa
+    document.getElementById('box-title').textContent = 'Voce ja esta logado';
+    document.getElementById('box-sub').innerHTML =
+      'Ola, <strong>'+(u.name||u.email)+'</strong>! <a href="/" style="color:var(--accent)">Ir para o site</a>';
+    document.getElementById('btn-google').style.display = 'none';
+    document.getElementById('divider').style.display    = 'none';
+    document.getElementById('tabs-auth').style.display  = 'none';
+    document.getElementById('form-login').style.display = 'none';
+    document.getElementById('form-switch-txt').innerHTML =
+      '<a href="/" style="color:var(--accent);font-weight:600">&larr; Voltar</a>' +
+      ' &nbsp;&mdash;&nbsp; ' +
+      '<a href="#" onclick="sair();return false" style="color:var(--red);font-weight:600">Sair da conta</a>';
+  } catch {}
+})();
+
+function sair() {
+  ['tu_token','tu_user','tu_premium','tu_usage'].forEach(k => localStorage.removeItem(k));
+  location.reload();
+}
+
+function switchAuth(mode) {
+  document.getElementById('tab-login').className  = 'tab-auth' + (mode === 'login'  ? ' on' : '');
+  document.getElementById('tab-signup').className = 'tab-auth' + (mode === 'signup' ? ' on' : '');
+  document.getElementById('form-login').style.display   = mode === 'login'   ? 'block' : 'none';
+  document.getElementById('form-signup').style.display  = mode === 'signup'  ? 'block' : 'none';
+  document.getElementById('form-forgot').style.display  = mode === 'forgot'  ? 'block' : 'none';
+  document.getElementById('form-switch-txt').style.display = mode === 'forgot' ? 'none' : 'block';
+  document.getElementById('tabs-auth').style.display    = mode === 'forgot'  ? 'none' : 'flex';
+  document.getElementById('err-auth').style.display = 'none';
+  document.getElementById('ok-auth').style.display  = 'none';
+  document.getElementById('forgot-devlink').style.display = 'none';
+  if (mode === 'login') {
+    document.getElementById('box-title').textContent = 'Entrar na sua conta';
+    document.getElementById('box-sub').innerHTML = 'Acesse 3 transcri\u00e7\u00f5es gratuitas por dia ou use o <strong>Premium</strong> sem limites';
+    document.getElementById('form-switch-txt').innerHTML = 'N\u00e3o tem conta? <a href="#" onclick="switchAuth(\'signup\');return false">Criar conta gr\u00e1tis</a>';
+  } else if (mode === 'signup') {
+    document.getElementById('box-title').textContent = 'Criar conta gr\u00e1tis';
+    document.getElementById('box-sub').textContent = '3 transcri\u00e7\u00f5es gratuitas por dia ap\u00f3s o cadastro';
+    document.getElementById('form-switch-txt').innerHTML = 'J\u00e1 tem conta? <a href="#" onclick="switchAuth(\'login\');return false">Entrar</a>';
+  } else if (mode === 'forgot') {
+    document.getElementById('box-title').textContent = 'Recuperar conta';
+    document.getElementById('box-sub').textContent = 'Informe seu e-mail e enviaremos as instru\u00e7\u00f5es de recupera\u00e7\u00e3o.';
+  }
+}
+
+function showErr(msg, isHtml) {
+  const el = document.getElementById('err-auth');
+  if (isHtml) el.innerHTML = msg; else el.textContent = msg;
+  el.style.display = 'block';
+  document.getElementById('ok-auth').style.display = 'none';
+}
+
+function saveUserAndRedirect(token, user) {
+  localStorage.setItem('tu_token',   token);
+  localStorage.setItem('tu_user',    JSON.stringify({ id: user.id, name: user.name, email: user.email }));
+  localStorage.setItem('tu_premium', user.is_premium ? '1' : '0');
+  localStorage.removeItem('tu_usage');
+  window.location.href = '/';
+}
+
+async function loginGoogle() {
+  const btn = document.getElementById('btn-google');
+  if (btn) { btn.disabled = true; btn.textContent = 'Conectando...'; }
+
+  const ok = await initSupabase();
+  if (!ok || !sbClient) {
+    showErr('Login com Google não está configurado. Configure SUPABASE_URL e SUPABASE_ANON_KEY no arquivo .env do servidor.');
+    if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Continuar com Google'; }
+    return;
+  }
+
+  if (btn) btn.textContent = 'Redirecionando...';
+  const redirectTo = window.location.href.split('?')[0].split('#')[0];
+  const { error } = await sbClient.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo }
+  });
+  if (error) {
+    showErr('Erro ao iniciar login com Google: ' + error.message);
+    if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Continuar com Google'; }
+  }
+}
+
+async function submitLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  if (!email) { showErr('Informe seu e-mail.'); return; }
+  if (!pass)  { showErr('Informe sua senha.'); return; }
+
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = 'Entrando...';
+
+  try {
+    const r = await fetch(API + '/api/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pass })
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      if (r.status === 401 && d.error?.includes('Google')) {
+        showErr(d.error + ' Ou <a href="#" onclick="switchAuth(\'forgot\');return false">recupere sua conta</a> se preferir usar e-mail.');
+      } else {
+        showErr(d.error || 'Erro ao entrar.');
+      }
+      return;
+    }
+    saveUserAndRedirect(d.token, d.user);
+  } catch {
+    showErr('Erro de conexao com o servidor. Tente novamente.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Entrar &rarr;';
+  }
+}
+
+async function submitForgot() {
+  const email = document.getElementById('forgot-email').value.trim();
+  if (!email) { showErr('Informe seu e-mail.'); return; }
+
+  const btn = document.getElementById('btn-forgot');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  document.getElementById('forgot-devlink').style.display = 'none';
+
+  try {
+    const r = await fetch(API + '/api/forgot-password', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const d = await r.json();
+    if (d.google_account) {
+      showErr('Este e-mail usa login com Google. Clique em "Continuar com Google" para entrar.');
+      return;
+    }
+    if (d.dev_url) {
+      // Dev mode: redirect straight to the reset form
+      const resetToken = new URL(d.dev_url).searchParams.get('reset');
+      if (resetToken) {
+        window.location.href = '/login.html?reset=' + resetToken;
+        return;
+      }
+    } else {
+      const ok = document.getElementById('ok-auth');
+      ok.textContent = 'Se esse e-mail estiver cadastrado, voc\u00ea receber\u00e1 as instru\u00e7\u00f5es em instantes.';
+      ok.style.display = 'block';
+    }
+    document.getElementById('err-auth').style.display = 'none';
+  } catch {
+    showErr('Erro de conex\u00e3o. Tente novamente.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Enviar instru&ccedil;&otilde;es &rarr;';
+  }
+}
+
+async function submitReset() {
+  const pass  = document.getElementById('reset-pass').value;
+  const pass2 = document.getElementById('reset-pass2').value;
+  const token = new URLSearchParams(location.search).get('reset');
+  if (!pass || pass.length < 6) { showErr('Senha com m\u00ednimo 6 caracteres.'); return; }
+  if (pass !== pass2) { showErr('As senhas n\u00e3o coincidem.'); return; }
+
+  const btn = document.getElementById('btn-reset');
+  btn.disabled = true; btn.textContent = 'Salvando...';
+
+  try {
+    const r = await fetch(API + '/api/reset-password', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, password: pass })
+    });
+    const d = await r.json();
+    if (!r.ok) { showErr(d.error || 'Erro ao redefinir senha.'); return; }
+    saveUserAndRedirect(d.token, d.user);
+  } catch {
+    showErr('Erro de conex\u00e3o. Tente novamente.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Redefinir senha &rarr;';
+  }
+}
+
+// Store pending signup data for resend
+let pendingSignupData = null;
+
+async function submitSignup() {
+  const name  = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass  = document.getElementById('signup-pass').value;
+  if (!name)               { showErr('Informe seu nome.'); return; }
+  if (!email)              { showErr('Informe seu e-mail.'); return; }
+  if (!email.includes('@')){ showErr('E-mail invalido.'); return; }
+  if (!pass || pass.length < 6) { showErr('A senha deve ter pelo menos 6 caracteres.'); return; }
+
+  const btn = document.getElementById('btn-signup');
+  btn.disabled = true; btn.textContent = 'Enviando c\u00f3digo...';
+
+  try {
+    const r = await fetch(API + '/api/signup', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password: pass })
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      if (d.action === 'forgot_password') {
+        showErr((d.error||'E-mail ja cadastrado.') + ' <a href="#" onclick="switchAuth(\'forgot\');return false" style="color:var(--accent);font-weight:600;text-decoration:underline">' + (d.action_label||'Recuperar senha') + '</a>', true);
+      } else {
+        showErr(d.error || 'Erro ao criar conta.');
+      }
+      return;
+    }
+    if (d.pending) {
+      // Show verification form
+      pendingSignupData = { name, email, password: pass };
+      showVerifyForm(d.email, d.dev_code);
+    } else if (d.token) {
+      saveUserAndRedirect(d.token, d.user);
+    }
+  } catch {
+    showErr('Erro de conexao com o servidor. Tente novamente.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Criar conta &rarr;';
+  }
+}
+
+function showVerifyForm(email, devCode) {
+  document.getElementById('err-auth').style.display = 'none';
+  document.getElementById('ok-auth').style.display  = 'none';
+  document.getElementById('btn-google').style.display  = 'none';
+  document.getElementById('divider').style.display     = 'none';
+  document.getElementById('tabs-auth').style.display   = 'none';
+  document.getElementById('form-login').style.display  = 'none';
+  document.getElementById('form-signup').style.display = 'none';
+  document.getElementById('form-forgot').style.display = 'none';
+  document.getElementById('form-verify').style.display = 'block';
+  document.getElementById('form-switch-txt').style.display = 'none';
+  document.getElementById('box-title').textContent = 'Verifique seu e-mail';
+  document.getElementById('box-sub').textContent = 'Digite o c\u00f3digo de 6 d\u00edgitos que enviamos';
+  document.getElementById('verify-email-display').textContent = email;
+  if (devCode) {
+    document.getElementById('verify-dev-code').style.display = 'block';
+    document.getElementById('verify-dev-code-value').textContent = devCode;
+  }
+  document.getElementById('verify-code').value = '';
+  document.getElementById('verify-code').focus();
+}
+
+async function submitVerify() {
+  const code = document.getElementById('verify-code').value.trim();
+  if (!code || code.length !== 6) { showErr('Digite o c\u00f3digo de 6 d\u00edgitos.'); return; }
+  if (!pendingSignupData) { showErr('Sess\u00e3o expirada. Volte e crie a conta novamente.'); return; }
+
+  const btn = document.getElementById('btn-verify');
+  btn.disabled = true; btn.textContent = 'Verificando...';
+
+  try {
+    const r = await fetch(API + '/api/verify-email', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: pendingSignupData.email, code })
+    });
+    const d = await r.json();
+    if (!r.ok) { showErr(d.error || 'C\u00f3digo inv\u00e1lido.'); return; }
+    saveUserAndRedirect(d.token, d.user);
+  } catch {
+    showErr('Erro de conex\u00e3o. Tente novamente.');
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Verificar &rarr;';
+  }
+}
+
+async function resendCode() {
+  if (!pendingSignupData) { showErr('Sess\u00e3o expirada. Volte e crie a conta novamente.'); return; }
+  const { name, email, password } = pendingSignupData;
+  try {
+    const r = await fetch(API + '/api/signup', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    });
+    const d = await r.json();
+    if (d.pending) {
+      if (d.dev_code) document.getElementById('verify-dev-code-value').textContent = d.dev_code;
+      const ok = document.getElementById('ok-auth');
+      ok.textContent = 'Novo c\u00f3digo enviado!';
+      ok.style.display = 'block';
+      document.getElementById('err-auth').style.display = 'none';
+      setTimeout(() => { ok.style.display = 'none'; }, 3000);
+    } else {
+      showErr(d.error || 'Erro ao reenviar.');
+    }
+  } catch {
+    showErr('Erro de conex\u00e3o.');
+  }
+}
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('tu_theme', isDark ? 'light' : 'dark');
+  updateLoginThemeIcon();
+}
+function updateLoginThemeIcon() {
+  var btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark
+    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    : '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+}
+(function(){ updateLoginThemeIcon(); })();
+</script>
+</body>
+</html>

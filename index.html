@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Transcricao Universal</title>
+<script>(function(){var t=localStorage.getItem('tu_theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --bg2:#F9FAFB;
+  --accent:#06B6D4;
+  --accent-dark:#0891B2;
+  --text:#0F172A;
+  --muted:#64748B;
+  --border:#E2E8F0;
+  --green:#16A34A;
+  --red:#DC2626;
+  --gold:#D97706;
+  --radius:12px;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.06);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;padding-top:56px}
+html{scroll-behavior:smooth}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(0,0,0,.05);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between}
+nav.scrolled{background:#fff;border-bottom-color:var(--border)}
+.nav-logo{font-family:'Agbalumo',system-ui;font-weight:400;font-size:1.25rem;letter-spacing:0;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
+.nav-logo em{font-style:normal;color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-link{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:color .15s}
+.nav-link:hover{color:var(--text)}
+.btn-nav-login{background:transparent;color:var(--text);border:1.5px solid var(--border);border-radius:8px;padding:6px 16px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-nav-login:hover{border-color:var(--text)}
+.btn-nav-premium{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-nav-premium:hover{background:var(--accent-dark)}
+.nav-user{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;color:var(--muted)}
+.nav-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0}
+
+/* ── Hamburger button (mobile only) ── */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:var(--text);line-height:0}
+.hamburger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* ── Mobile slide-down menu ── */
+.mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1.5px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:99;padding:12px 16px 16px;animation:fadeDown .18s ease}
+.mobile-menu.open{display:flex;flex-direction:column;gap:4px}
+.mm-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:.88rem;font-weight:500;color:var(--text);text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;transition:background .12s;width:100%;text-align:left}
+.mm-item:hover,.mm-item:active{background:var(--bg2)}
+.mm-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;color:var(--muted)}
+.mm-divider{height:1px;background:var(--border);margin:4px 0}
+.mm-item.accent{color:var(--accent);font-weight:600}
+.mm-item.danger{color:var(--red);font-weight:600}
+.mm-user{display:flex;align-items:center;gap:10px;padding:10px 14px 12px}
+.mm-user-info{font-size:.82rem;color:var(--muted)}
+.mm-user-name{font-weight:600;color:var(--text);font-size:.88rem}
+
+.hero-screen{min-height:calc(100vh - 56px);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 0 56px}
+
+.hero{text-align:center;padding:0 24px 28px;max-width:760px;margin:0 auto;width:100%}
+.hero-overline{font-size:.72rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:7px}
+.hero-dot-circle{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;display:inline-block}
+.hero-title{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(3.4rem,8vw,6.5rem);color:var(--accent);line-height:1.05;margin-bottom:20px;letter-spacing:-.5px}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.65;max-width:480px;margin:0 auto}
+
+.usage-row{max-width:680px;margin:0 auto 10px;padding:0 24px;display:flex;justify-content:flex-start}
+.usage-pill{font-size:.72rem;font-weight:500;color:var(--muted);background:var(--bg2);border:1px solid var(--border);border-radius:100px;padding:3px 12px}
+.usage-pill b{color:var(--accent)}
+
+.search-wrap{max-width:680px;margin:0 auto;padding:0 24px 0;width:100%}
+.search-box{display:flex;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:100px;padding:6px 6px 6px 20px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(6,182,212,.12),var(--shadow)}
+.search-box input{flex:1;border:none;background:transparent;font-family:inherit;font-size:.9rem;color:var(--text);outline:none;min-width:0;padding:6px 0}
+.search-box input::placeholder{color:#94A3B8}
+.btn-go{background:var(--text);color:#fff;border:none;border-radius:100px;padding:10px 24px;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.btn-go:hover:not(:disabled){background:#1E293B}
+.btn-go:disabled{opacity:.45;cursor:not-allowed}
+.btn-paste{background:transparent;color:var(--muted);border:none;padding:8px 10px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;font-size:.78rem;font-weight:500;border-left:1px solid var(--border);margin-left:4px;transition:color .15s;white-space:nowrap;flex-shrink:0}
+.btn-paste:hover{color:var(--text)}
+
+.platform-badges{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0;padding:0}
+.pbadge{font-size:.68rem;font-weight:500;padding:3px 9px;border-radius:100px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);white-space:nowrap;letter-spacing:.1px}
+
+.prog-sec{display:none;margin-top:14px}
+.steps{display:flex;flex-direction:column;gap:8px}
+.step{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:var(--bg2);border:1.5px solid transparent;transition:all .25s}
+.step.on{background:#ECFEFF;border-color:#A5F3FC}
+.step.done{background:#F0FDF4;border-color:#BBF7D0}
+.s-ico{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;border:1.5px solid var(--border)}
+.step.on .s-ico{border-color:var(--accent);color:var(--accent)}
+.step.done .s-ico{border-color:var(--green);color:var(--green)}
+.s-name{font-weight:600;font-size:.85rem}
+.s-sub{font-size:.72rem;color:var(--muted);margin-top:1px}
+.s-spin{width:13px;height:13px;border:2px solid #A5F3FC;border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.err-sec{display:none;margin-top:12px;padding:11px 14px;background:#FEF2F2;border:1px solid #FCA5A5;border-radius:10px;align-items:center;justify-content:space-between;gap:12px}
+.err-sec p{font-size:.83rem;color:var(--red)}
+.btn-retry{background:var(--red);color:#fff;border:none;border-radius:7px;padding:6px 14px;font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap}
+
+.res-sec{display:none;margin-top:14px;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.res-header{padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.res-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:.2px}
+.badge-done{background:#DCFCE7;color:var(--green)}
+.badge-words{background:#ECFEFF;color:var(--accent-dark)}
+.badge-lang{background:#F1F5F9;color:var(--muted)}
+.res-actions{display:flex;gap:6px}
+.btn-sm{border:1.5px solid var(--border);background:#fff;color:var(--text);padding:5px 12px;border-radius:7px;font-family:inherit;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 16px;margin-top:12px}
+.tab{padding:8px 12px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.tab.on{color:var(--accent-dark);border-bottom-color:var(--accent)}
+.tab-pane{display:none;padding:16px}
+.tab-pane.on{display:block}
+#txt-full{font-size:.875rem;line-height:1.8;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto}
+.seg-list{display:flex;flex-direction:column;gap:5px;max-height:300px;overflow-y:auto}
+.seg{display:flex;gap:10px;align-items:flex-start}
+.seg-time{font-family:monospace;font-size:.68rem;color:var(--muted);background:var(--bg2);padding:2px 6px;border-radius:4px;flex-shrink:0;margin-top:2px}
+.seg-txt{font-size:.84rem;line-height:1.65}
+
+.limit-wall{display:none;margin-top:16px;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.limit-wall-inner{padding:32px 24px;text-align:center}
+.limit-wall h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.limit-wall p{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:24px}
+.limit-actions{display:flex;flex-direction:column;gap:8px}
+.btn-limit{width:100%;padding:12px;border-radius:9px;font-family:inherit;font-size:.875rem;font-weight:700;cursor:pointer;transition:all .15s;border:none}
+.btn-limit-login{background:var(--text);color:#fff}
+.btn-limit-login:hover{background:#1E293B}
+.btn-limit-premium{background:var(--text);color:#fff}
+.btn-limit-premium:hover{background:#1E293B}
+.limit-divider{display:flex;align-items:center;gap:10px;margin:4px 0}
+.limit-divider span{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.limit-divider::before,.limit-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.how{max-width:820px;margin:0 auto;padding:0 24px 56px;scroll-margin-top:56px}
+.how-inner{border-top:1px solid var(--border);padding-top:56px}
+.section-label{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:12px}
+.section-title{text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.5px;margin-bottom:48px;color:var(--text)}
+.steps-how{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.steps-how::before{content:'';position:absolute;top:28px;left:calc(16.66% + 12px);right:calc(16.66% + 12px);height:1px;background:var(--border);z-index:0}
+.how-card{text-align:center;padding:0 24px;position:relative;z-index:1}
+.how-num-wrap{display:flex;justify-content:center;margin-bottom:20px}
+.how-num{width:56px;height:56px;border-radius:50%;background:#fff;border:1.5px solid var(--border);color:var(--text);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center;letter-spacing:-.3px}
+.how-title{font-weight:700;font-size:.9rem;margin-bottom:8px;color:var(--text)}
+.how-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:300;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.overlay.open{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.2);text-align:center;flex-shrink:0}
+.modal-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:#ECFEFF;color:var(--accent);border-radius:100px;padding:3px 10px;margin-bottom:14px}
+.modal h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+.modal-desc{color:var(--muted);font-size:.83rem;line-height:1.65;margin-bottom:18px}
+.modal-perks{text-align:left;background:var(--bg2);border-radius:10px;padding:14px 16px;margin-bottom:18px;border:1px solid var(--border)}
+.modal-perk{font-size:.8rem;color:var(--text);padding:4px 0;display:flex;align-items:center;gap:8px}
+.modal-perk-check{width:16px;height:16px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-perk-check svg{color:var(--green)}
+.modal-price{font-size:2.4rem;font-weight:800;color:var(--text);letter-spacing:-2px;margin-bottom:2px}
+.modal-price-sub{font-size:.72rem;color:var(--muted);margin-bottom:20px}
+.btn-pix{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:13px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .15s;margin-bottom:8px}
+.btn-pix:hover{background:var(--accent-dark)}
+.btn-close-modal{width:100%;background:transparent;color:var(--muted);border:1.5px solid var(--border);border-radius:9px;padding:11px;font-family:inherit;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-close-modal:hover{color:var(--text);border-color:var(--text)}
+
+.pay-spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pix-qr-img{width:160px;height:160px;border:1px solid var(--border);border-radius:8px;object-fit:contain}
+.pix-code-box{width:100%;font-size:.7rem;font-family:monospace;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px;resize:none;color:var(--text);line-height:1.4;cursor:pointer;word-break:break-all;margin:12px 0 4px}
+.pix-notice{font-size:.78rem;color:var(--muted);background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:10px 12px;margin:12px 0;line-height:1.5;text-align:left}
+.pix-notice strong{color:#92400E}
+.btn-pix-copy{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:12px;font-family:inherit;font-size:.875rem;font-weight:700;cursor:pointer;transition:background .15s;margin-bottom:8px}
+.btn-pix-copy:hover{background:var(--accent-dark)}
+.pay-icon{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto;font-weight:700}
+.pay-icon-ok{background:#DCFCE7;color:#16A34A}
+.pay-icon-err{background:#FEE2E2;color:#DC2626}
+
+.nav-profile{position:relative}
+.nav-avatar-btn{background:none;border:1.5px solid var(--border);padding:3px;cursor:pointer;display:flex;align-items:center;gap:8px;border-radius:100px;transition:border-color .15s}
+.nav-avatar-btn:hover{border-color:var(--muted)}
+.nav-avatar-btn .nav-avatar{transition:box-shadow .15s}
+.nav-username{font-size:.82rem;font-weight:500;color:var(--muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:6px}
+.nav-avatar.gold{background:var(--gold)}
+.nav-username.gold{color:var(--gold);font-weight:600}
+.profile-drop{position:absolute;right:0;top:calc(100% + 8px);width:280px;background:#fff;border:1.5px solid var(--border);border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.15);z-index:200;overflow:hidden;animation:fadeDown .15s ease}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.pd-header{padding:16px 16px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.pd-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0}
+.pd-name{font-weight:600;font-size:.875rem}
+.pd-email{font-size:.72rem;color:var(--muted);margin-top:1px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd-body{padding:14px 16px}
+.pd-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.pd-row-label{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.pd-badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:.3px}
+.pd-badge.free{background:#F1F5F9;color:var(--muted)}
+.pd-badge.prem{background:#FEF3C7;color:var(--gold)}
+.pd-credits-block{margin-bottom:16px}
+.pd-credits-top{font-size:.75rem;color:var(--muted);margin-bottom:7px;display:flex;justify-content:space-between}
+.pd-credits-top strong{color:var(--text)}
+.pd-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.pd-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+.pd-btns{display:flex;flex-direction:column;gap:6px}
+.pd-btn{width:100%;padding:9px 0;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;border:none;transition:all .15s}
+.pd-btn-up{background:var(--accent);color:#fff}
+.pd-btn-up:hover{background:var(--accent-dark)}
+.pd-btn-out{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
+.pd-btn-out:hover{color:var(--red);border-color:var(--red)}
+.pd-btn-cancel{background:transparent;color:var(--red);border:1.5px solid #FCA5A5;font-size:.75rem}
+.pd-btn-cancel:hover{background:#FEE2E2;border-color:var(--red)}
+.pd-cancel-notice{font-size:.75rem;color:var(--muted);background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:9px 12px;line-height:1.5;margin-bottom:4px}
+.pd-cancel-notice strong{color:#92400E}
+
+.promo{background:var(--bg);padding:0 24px 72px}
+.promo-inner{max-width:820px;margin:0 auto;border-top:1px solid var(--border);padding-top:56px}
+.promo-inner{max-width:760px;margin:0 auto}
+.promo-top{text-align:center;margin-bottom:72px}
+.promo-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#ECFEFF;color:var(--accent-dark);border-radius:100px;padding:4px 12px;margin-bottom:28px}
+.promo-h{font-family:'Agbalumo',system-ui;font-weight:400;font-size:clamp(2rem,5vw,2.6rem);line-height:1.15;margin-bottom:10px;letter-spacing:-.3px;color:var(--text)}
+.promo-h span{color:var(--accent)}
+.promo-sub{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:460px;margin:0 auto}
+.promo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:64px}
+.promo-perk{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:20px 22px;font-size:.82rem;color:var(--muted);line-height:1.6}
+.promo-perk strong{color:var(--text);display:block;font-size:.875rem;font-weight:700;margin-bottom:4px}
+.promo-bottom{text-align:center}
+.promo-price-row{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:12px}
+.promo-price{font-size:2.8rem;font-weight:800;color:var(--text);letter-spacing:-2px}
+.promo-period{font-size:.95rem;color:var(--muted);font-weight:500}
+.promo-fine{font-size:.75rem;color:var(--muted);margin-bottom:40px}
+.promo-cta{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:14px 40px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .15s}
+.promo-cta:hover{background:var(--accent-dark)}
+@media(max-width:600px){.promo-grid{grid-template-columns:1fr}.promo{padding:0 20px 56px}}
+
+.premium-thanks{background:var(--bg);padding:0 24px 72px;display:none}
+.premium-thanks-inner{max-width:820px;margin:0 auto;border-top:1px solid var(--border);padding-top:56px}
+.thanks-top{text-align:center;margin-bottom:56px}
+.thanks-badge{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,#FEF3C7,#FDE68A);color:#92400E;border-radius:100px;padding:6px 16px;margin-bottom:24px;box-shadow:0 2px 8px rgba(245,158,11,.2)}
+.thanks-h{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin-bottom:14px;letter-spacing:-.5px;color:var(--text)}
+.thanks-sub{font-size:.9rem;color:var(--muted);line-height:1.75;max-width:500px;margin:0 auto}
+.thanks-perks{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--border);border-radius:16px;overflow:hidden}
+.thanks-perk{padding:28px 20px;text-align:center;border-right:1.5px solid var(--border);position:relative}
+.thanks-perk:last-child{border-right:none}
+.thanks-perk-icon{font-size:1.6rem;margin-bottom:14px;display:block}
+.thanks-perk-title{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.thanks-perk-desc{font-size:.75rem;color:var(--muted);line-height:1.6}
+@media(max-width:700px){.thanks-perks{grid-template-columns:repeat(2,1fr)}.thanks-perk:nth-child(2){border-right:none}.thanks-perk:nth-child(3){border-top:1.5px solid var(--border)}.thanks-perk:nth-child(4){border-top:1.5px solid var(--border);border-right:none}.premium-thanks{padding:0 16px 48px}}
+@media(max-width:420px){.thanks-perks{grid-template-columns:1fr}.thanks-perk{border-right:none!important;border-top:1.5px solid var(--border)}.thanks-perk:first-child{border-top:none}}
+[data-theme="dark"] .thanks-perks{border-color:var(--border)}
+[data-theme="dark"] .thanks-perk{border-right-color:var(--border)}
+[data-theme="dark"] .thanks-badge{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(252,211,77,.15));color:var(--gold);box-shadow:none}
+[data-theme="dark"] .premium-thanks-inner{border-top-color:var(--border)}
+
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
+.footer-logo{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:.95rem;color:var(--text);margin-bottom:5px}
+.footer-logo em{color:var(--text)}
+.footer-txt{color:var(--muted);font-size:.75rem}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:2px}
+
+@media(max-width:600px){
+  /* ── Nav ── */
+  body{padding-top:52px}
+  nav{padding:0 14px;height:52px}
+  .nav-right{display:none}
+  .hamburger{display:flex}
+
+  /* ── Profile dropdown ── */
+  .profile-drop{position:fixed;top:52px;right:0;left:0;width:100%;max-width:100%;border-radius:0 0 16px 16px;box-shadow:0 12px 40px rgba(0,0,0,.25);border-top:none}
+
+  /* ── Hero ── */
+  .hero-screen{min-height:unset;height:auto;padding:32px 0 24px;justify-content:flex-start}
+  .hero{padding:0 18px 18px}
+  .hero-title{font-size:clamp(2.4rem,11vw,3.2rem);margin-bottom:14px;line-height:1.02}
+  .hero-sub{font-size:.875rem;max-width:100%;line-height:1.65;text-align:center}
+
+  /* ── Search box: stack vertically on mobile ── */
+  .search-wrap{padding:0 16px}
+  .search-box{flex-wrap:wrap;padding:12px 14px;border-radius:16px;gap:0;box-shadow:0 2px 16px rgba(6,182,212,.12);border-color:rgba(6,182,212,.25);align-items:center}
+  .search-box input{font-size:16px;padding:8px 0;flex:1;min-width:0}
+  .btn-paste{border-left:1px solid var(--border);border-top:none;margin-left:4px;padding:8px 10px;font-size:.82rem;flex-shrink:0}
+  .btn-go{flex-basis:100%;justify-content:center;padding:14px;font-size:.95rem;font-weight:700;border-radius:12px;margin-top:8px;min-height:48px;letter-spacing:.2px}
+
+  /* ── Status / Pills ── */
+  .usage-pill{font-size:.68rem;padding:4px 10px}
+  .steps{gap:5px}
+  .step{padding:9px 11px}
+  .s-name{font-size:.78rem}
+
+  /* ── Results area ── */
+  .res-sec{margin-top:12px}
+  .res-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .res-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .btn-sm{justify-content:center;padding:9px 0;min-height:40px;font-size:.78rem}
+  #txt-full{font-size:.82rem;max-height:220px;line-height:1.65}
+  .seg-list{max-height:220px}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .tab{white-space:nowrap;font-size:.78rem;padding:6px 14px}
+  .err-sec{flex-direction:column;align-items:flex-start;gap:8px}
+  .btn-retry{width:100%;justify-content:center}
+
+  /* ── Premium modal / overlays ── */
+  .overlay.open{padding:10px 10px 20px}
+  .modal{border-radius:18px;padding:22px 14px}
+  .modal-price{font-size:1.8rem}
+  .modal-tag{font-size:.63rem}
+  .modal h2{font-size:1.15rem}
+  .modal-desc{font-size:.8rem}
+  .pix-qr-img{width:140px;height:140px}
+  .pix-code-box{font-size:.65rem}
+  .btn-pix{min-height:52px;font-size:.9rem}
+  .btn-close-modal{min-height:46px}
+
+  /* ── Cancel overlay ── */
+  #cancel-overlay > div{max-width:calc(100vw - 24px)!important;padding:26px 18px!important;border-radius:16px!important}
+  #cancel-overlay h3{font-size:.98rem!important}
+  #cancel-overlay p{font-size:.8rem!important}
+  #cancel-overlay div[style*='display:flex']{flex-direction:column!important;gap:8px!important}
+  #cancel-overlay button{width:100%!important;margin:0!important}
+
+  /* ── How section ── */
+  .how{padding:0 16px 40px}
+  .steps-how{grid-template-columns:1fr;gap:24px}
+  .steps-how::before{display:none}
+  .how-card{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:14px;row-gap:4px;text-align:left;padding:0}
+  .how-num-wrap{grid-row:1/3;grid-column:1;margin-bottom:0;display:flex;align-items:flex-start;padding-top:2px}
+  .how-num{width:44px;height:44px;font-size:.82rem}
+  .how-title{grid-row:1;grid-column:2;align-self:end;font-size:.875rem}
+  .how-desc{grid-row:2;grid-column:2;align-self:start;font-size:.8rem;color:var(--muted)}
+  .section-label{font-size:.68rem}
+  .section-title{font-size:1.35rem;margin-bottom:32px}
+
+  /* ── Promo section ── */
+  .promo{padding:0 16px 44px}
+  .promo-grid{grid-template-columns:1fr}
+  .promo-h{font-size:1.4rem;letter-spacing:-.5px}
+  .promo-sub{font-size:.84rem}
+
+  /* ── Limit wall ── */
+  .limit-wall-inner{padding:22px 14px}
+
+  /* ── Footer ── */
+  footer{padding:18px 16px}
+  .footer-logo{font-size:.88rem}
+}
+/* Extra-small phones (≤380px) */
+@media(max-width:380px){
+  .hero-title{font-size:clamp(1.9rem,9vw,2.4rem)}
+  .search-box input{font-size:16px}
+  nav{padding:0 10px}
+  .btn-nav-login,.btn-nav-premium{padding:5px 9px;font-size:.75rem}
+}
+/* ── Dark Mode ── */
+html[data-theme="dark"]{
+  --bg:#0B1120;--bg2:#131B2E;--accent:#ffffff;--accent-dark:#e2e8f0;
+  --text:#E2E8F0;--muted:#94A3B8;--border:#1E293B;
+  --green:#22C55E;--red:#EF4444;--gold:#F59E0B;
+  --shadow:0 2px 4px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+[data-theme="dark"] nav,[data-theme="dark"] nav.scrolled{background:var(--bg2);border-bottom-color:var(--border);box-shadow:0 1px 0 rgba(0,0,0,.3)}
+[data-theme="dark"] .search-box{background:var(--bg2);border-color:var(--border)}
+[data-theme="dark"] .search-box:focus-within{box-shadow:0 0 0 3px rgba(34,211,238,.2),var(--shadow)}
+[data-theme="dark"] .hero-screen{background:linear-gradient(170deg,rgba(6,182,212,.05) 0%,var(--bg) 60%)}
+[data-theme="dark"] .s-ico,[data-theme="dark"] .how-num{background:var(--bg2);border-color:var(--border)}
+[data-theme="dark"] .step.on{background:rgba(6,182,212,.08);border-color:rgba(6,182,212,.2)}
+[data-theme="dark"] .step.done{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.15)}
+[data-theme="dark"] .res-sec{background:var(--bg2);border-color:var(--border)}
+[data-theme="dark"] .btn-sm{background:var(--bg);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .modal{background:var(--bg2);box-shadow:0 24px 80px rgba(0,0,0,.5)}
+[data-theme="dark"] .modal-perks{background:var(--bg);border-color:var(--border)}
+[data-theme="dark"] .modal-tag,[data-theme="dark"] .promo-eyebrow{background:rgba(6,182,212,.12)}
+[data-theme="dark"] .profile-drop{background:var(--bg2);border-color:var(--border);box-shadow:0 8px 40px rgba(0,0,0,.4)}
+[data-theme="dark"] .pd-header{border-bottom-color:var(--border)}
+[data-theme="dark"] .pd-badge.free{background:var(--bg);color:var(--muted)}
+[data-theme="dark"] .pd-btn-out{border-color:var(--border)}
+[data-theme="dark"] .pd-cancel-notice{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.12)}
+[data-theme="dark"] .pix-code-box{background:var(--bg);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .pix-notice{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.12)}
+[data-theme="dark"] .pix-notice strong{color:var(--gold)}
+[data-theme="dark"] .err-sec{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.15)}
+[data-theme="dark"] .limit-wall{background:var(--bg2);border-color:var(--border)}
+[data-theme="dark"] .pbadge{background:var(--bg2);border-color:var(--border)}
+[data-theme="dark"] .tabs{border-bottom-color:var(--border)}
+[data-theme="dark"] .promo-perk{background:var(--bg);border-color:var(--border)}
+[data-theme="dark"] .btn-nav-login{border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .btn-nav-premium{background:#fff;color:#0F172A}
+[data-theme="dark"] .btn-nav-premium:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] .nav-avatar-btn{border-color:var(--border)}
+[data-theme="dark"] .nav-avatar-btn:hover{border-color:var(--muted)}
+[data-theme="dark"] .btn-close-modal{border-color:var(--border)}
+[data-theme="dark"] footer{border-top-color:var(--border)}
+[data-theme="dark"] .badge-done{background:rgba(34,197,94,.1);color:var(--green)}
+[data-theme="dark"] .badge-words{background:rgba(6,182,212,.1);color:var(--accent)}
+[data-theme="dark"] .badge-lang{background:var(--bg);color:var(--muted)}
+[data-theme="dark"] .btn-go{background:#fff;color:#0F172A}
+[data-theme="dark"] .btn-go:hover:not(:disabled){background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#475569}
+[data-theme="dark"] .how-inner,[data-theme="dark"] .promo-inner{border-top-color:var(--border)}
+[data-theme="dark"] .overlay{background:rgba(0,0,0,.6)}
+[data-theme="dark"] #cancel-overlay>div[style]{background:var(--bg2)!important}
+[data-theme="dark"] .pd-avatar{background:#475569;color:#fff}
+[data-theme="dark"] .nav-avatar{background:#475569;color:#fff}
+[data-theme="dark"] .btn-pix{background:#fff;color:#0F172A}
+[data-theme="dark"] .btn-pix:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] .btn-pix-copy{background:#fff;color:#0F172A}
+[data-theme="dark"] .btn-pix-copy:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] .pd-btn-up{background:#fff;color:#0F172A}
+[data-theme="dark"] .pd-btn-up:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] .promo-cta{background:#fff;color:#0F172A}
+[data-theme="dark"] .promo-cta:hover{background:#e2e8f0;color:#0F172A}
+[data-theme="dark"] .mobile-menu{background:var(--bg2);border-bottom-color:var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+[data-theme="dark"] .mm-item:hover,[data-theme="dark"] .mm-item:active{background:var(--bg)}
+.theme-toggle{background:none;border:1.5px solid var(--border);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--muted);padding:0;line-height:1;flex-shrink:0}
+.theme-toggle:hover{border-color:var(--text);color:var(--text)}
+.theme-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-nav-premium,.btn-nav-login,.theme-toggle,.nav-avatar-btn{height:32px;box-sizing:border-box}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    Transcri&ccedil;&atilde;o<em>Universal</em>
+  </a>
+  <div class="nav-right" id="nav-right">
+    <a class="nav-link" href="#como-usar">Como usar</a>
+    <button class="btn-nav-premium" onclick="openPremium()">Seja Premium</button>
+    <button class="btn-nav-login" onclick="goLogin()">Entrar</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"></button>
+  </div>
+  <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu"></div>
+
+<section class="hero-screen">
+<div class="hero">
+  <div class="hero-title">Transcri&ccedil;&atilde;o Universal</div>
+  <p class="hero-sub">Cole um link do YouTube, TikTok ou Instagram &mdash; qualquer idioma, v&iacute;deos de at&eacute; 30 minutos &mdash; e receba o texto completo com timestamps em segundos.</p>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <input id="url" type="text" placeholder="Cole o link do v&iacute;deo aqui..." autocomplete="off" onkeydown="if(event.key==='Enter')go()"/>
+    <button class="btn-paste" onclick="pasteUrl()" title="Colar">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+      Colar
+    </button>
+    <button class="btn-go" id="btn-go" onclick="go()">Transcrever</button>
+  </div>
+  <div id="usage-row" style="margin:10px 0 0"></div>
+
+  <div class="prog-sec" id="prog">
+    <div class="steps">
+      <div class="step" id="s1">
+        <div class="s-ico" id="s1i">&#8595;</div>
+        <div><div class="s-name">Obtendo conte&uacute;do</div><div class="s-sub" id="s1sub">Aguardando...</div></div>
+      </div>
+      <div class="step" id="s2">
+        <div class="s-ico" id="s2i">&#9670;</div>
+        <div><div class="s-name">Intelig&ecirc;ncia Artificial</div><div class="s-sub">Transcrevendo com Whisper AI...</div></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="err-sec" id="err-sec" style="display:none">
+    <p id="err-msg">Tente novamente com um link v&aacute;lido.</p>
+    <button class="btn-retry" onclick="resetErr()">Tentar novamente</button>
+  </div>
+
+  
+  <div class="res-sec" id="res-sec">
+    <div class="res-header">
+      <div class="res-meta">
+        <span class="badge badge-done">Conclu&iacute;do</span>
+        <span class="badge badge-words" id="badge-words"></span>
+        <span class="badge badge-lang" id="badge-lang" style="display:none"></span>
+      </div>
+      <div class="res-actions">
+        <button class="btn-sm" id="btn-copy" onclick="cp()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar</button>
+        <button class="btn-sm" onclick="dl()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Baixar</button>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab on" id="tab-text" onclick="switchTab('text')">Texto</div>
+      <div class="tab" id="tab-ts" onclick="switchTab('ts')">Timestamps</div>
+    </div>
+    <div class="tab-pane on" id="pane-text"><div id="txt-full"></div></div>
+    <div class="tab-pane" id="pane-ts"><div class="seg-list" id="seg-list"></div></div>
+  </div>
+
+  
+  <div class="limit-wall" id="limit-wall">
+    <div class="limit-wall-inner">
+      <h3 id="limit-title">Limite gratuito atingido</h3>
+      <p id="limit-desc"></p>
+      <div class="limit-actions" id="limit-actions"></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="how" id="como-usar">
+  <div class="how-inner">
+    <p class="section-label">Como funciona</p>
+    <h2 class="section-title">Simples assim</h2>
+    <div class="steps-how">
+      <div class="how-card">
+        <div class="how-num-wrap"><div class="how-num">01</div></div>
+        <div class="how-title">Cole o link</div>
+        <div class="how-desc">Copie o link de qualquer v&iacute;deo do YouTube, TikTok, Instagram ou Shorts e cole no campo acima.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num-wrap"><div class="how-num">02</div></div>
+        <div class="how-title">Processamento autom&aacute;tico</div>
+        <div class="how-desc">Nossa IA extrai e transcreve o &aacute;udio automaticamente, com alta precis&atilde;o, em menos de um minuto.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num-wrap"><div class="how-num">03</div></div>
+        <div class="how-title">Texto pronto</div>
+        <div class="how-desc">Receba a transcri&ccedil;&atilde;o completa com timestamps. Copie diretamente ou baixe como arquivo .txt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="premium-thanks" id="premium-thanks">
+  <div class="premium-thanks-inner">
+    <div class="thanks-top">
+      <span class="thanks-badge">&#9733; Premium Vital&iacute;cio</span>
+      <h2 class="thanks-h">Muito obrigado por ser Premium!</h2>
+      <p class="thanks-sub">Voc&ecirc; faz parte do grupo seleto que transcreve sem limites. Aqui est&atilde;o todos os seus benef&iacute;cios ativos:</p>
+    </div>
+    <div class="thanks-perks">
+      <div class="thanks-perk">
+        <span class="thanks-perk-icon">&#9889;</span>
+        <div class="thanks-perk-title">100 transcri&ccedil;&otilde;es/dia</div>
+        <div class="thanks-perk-desc">Volume de sobra para qualquer uso profissional ou pessoal.</div>
+      </div>
+      <div class="thanks-perk">
+        <span class="thanks-perk-icon">&#9726;</span>
+        <div class="thanks-perk-title">Acesso vital&iacute;cio</div>
+        <div class="thanks-perk-desc">Pagou uma vez, usa para sempre. Sem renova&ccedil;&atilde;o nem cobran&ccedil;as futuras.</div>
+      </div>
+      <div class="thanks-perk">
+        <span class="thanks-perk-icon">&#128241;</span>
+        <div class="thanks-perk-title">Qualquer dispositivo</div>
+        <div class="thanks-perk-desc">Acesse do celular, tablet ou computador com a mesma conta.</div>
+      </div>
+      <div class="thanks-perk">
+        <span class="thanks-perk-icon">&#10024;</span>
+        <div class="thanks-perk-title">Sem an&uacute;ncios</div>
+        <div class="thanks-perk-desc">Experi&ecirc;ncia completamente limpa, sem nenhuma interrup&ccedil;&atilde;o.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="promo" id="premium-promo">
+  <div class="promo-inner">
+    <div class="promo-top">
+      <span class="promo-eyebrow">Premium</span>
+      <h2 class="promo-h">Transcreva sem limites com <span>um &uacute;nico pagamento</span></h2>
+      <p class="promo-sub">Sem an&uacute;ncios, 100 transcri&ccedil;&otilde;es por dia, em qualquer dispositivo. Pague uma vez, use para sempre.</p>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-perk"><strong>Sem an&uacute;ncios</strong>Processe v&iacute;deos sem propagandas durante o carregamento.</div>
+      <div class="promo-perk"><strong>100 transcri&ccedil;&otilde;es por dia</strong>Contra apenas 3 do plano gratuito &mdash; volume de sobra.</div>
+      <div class="promo-perk"><strong>Qualquer dispositivo</strong>Acesse do celular, tablet ou computador com a mesma conta.</div>
+      <div class="promo-perk"><strong>Acesso vital&iacute;cio</strong>Pague uma &uacute;nica vez e tenha Premium para sempre. Sem renova&ccedil;&atilde;o.</div>
+    </div>
+    <div class="promo-bottom">
+      <div class="promo-price-row"><span class="promo-price">R$0,05</span><span class="promo-period">pagamento &uacute;nico</span></div>
+      <p class="promo-fine">Pagamento &uacute;nico via PIX &mdash; <strong style="color:var(--accent)">R$0,05 (teste)</strong></p>
+      <button class="promo-cta" onclick="openPremium()">Comprar Premium &mdash; R$0,05</button>
+    </div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal">
+
+    
+    <div id="modal-plan">
+      <span class="modal-tag">Premium Vital&iacute;cio</span>
+      <h2>Premium &mdash; Pagamento &Uacute;nico</h2>
+      <p class="modal-desc">Pague uma &uacute;nica vez e tenha acesso Premium para sempre.</p>
+      <div class="modal-perks">
+        <div class="modal-perk"><span class="modal-perk-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>Sem an&uacute;ncios durante o processamento</div>
+        <div class="modal-perk"><span class="modal-perk-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>100 transcri&ccedil;&otilde;es por dia</div>
+        <div class="modal-perk"><span class="modal-perk-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>Acesso vital&iacute;cio &mdash; para sempre</div>
+      </div>
+      <div class="modal-price">R$0,05</div>
+      <div class="modal-price-sub">pagamento &uacute;nico via PIX <span style="color:var(--accent);font-weight:600">(TESTE)</span></div>
+      <button class="btn-pix" onclick="showPixForm()" style="background:#00B37E">&#9654; Pagar com PIX</button>
+      <button class="btn-close-modal" style="margin-top:8px" onclick="closeModal()">Agora n&atilde;o</button>
+    </div>
+
+    
+    <div id="modal-pix" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+        <button onclick="modalStep('plan')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.3rem;padding:0;line-height:1">&larr;</button>
+        <h3 style="margin:0;font-size:1rem;font-weight:700">Pagar com PIX</h3>
+      </div>
+      <div id="pix-loading" style="text-align:center;padding:20px 0">
+        <div class="pay-spinner"></div>
+        <p style="margin-top:14px;color:var(--muted);font-size:.85rem">Gerando c&oacute;digo PIX...</p>
+      </div>
+      <div id="pix-content" style="display:none;text-align:center">
+        <img id="pix-qr-img" src="" alt="QR Code PIX" class="pix-qr-img"/>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Ou copie o c&oacute;digo abaixo e cole no seu banco:</p>
+        <textarea id="pix-code-field" class="pix-code-box" readonly rows="3" onclick="this.select()"></textarea>
+        <button class="btn-pix-copy" onclick="copyPixCode()">&#128203; Copiar c&oacute;digo PIX</button>
+        <div class="pix-notice">
+          &#9989;&nbsp;<strong>Pagamento &uacute;nico.</strong> Ap&oacute;s confirmado, seu acesso Premium &eacute; ativado <strong>para sempre</strong>.
+        </div>
+        <p id="pix-status-msg" style="font-size:.78rem;color:var(--muted);min-height:18px;margin-bottom:10px">Aguardando pagamento...</p>
+        <button class="btn-pix" onclick="checkPixNow()" style="background:var(--text);margin-bottom:8px">J&aacute; paguei &rarr;</button>
+        <button class="btn-close-modal" onclick="closeModal()">Cancelar</button>
+      </div>
+      <div id="pix-error" style="display:none;text-align:center;padding:10px 0">
+        <div class="pay-icon pay-icon-err" style="margin-bottom:12px">&#10005;</div>
+        <p id="pix-error-msg" style="color:var(--muted);font-size:.85rem;margin-bottom:18px">Erro ao gerar PIX.</p>
+        <button class="btn-pix" onclick="showPixForm()" style="margin-bottom:8px">Tentar novamente</button>
+        <button class="btn-close-modal" onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+
+    <div id="modal-loading" style="display:none;text-align:center;padding:20px 0">
+      <div class="pay-spinner"></div>
+      <p style="margin-top:18px;color:var(--muted);font-size:.9rem">Processando pagamento...</p>
+    </div>
+
+    
+    <div id="modal-success" style="display:none;text-align:center;padding:20px 0">
+      <div class="pay-icon pay-icon-ok">&#10003;</div>
+      <h3 style="margin:18px 0 8px;font-size:1.15rem;font-weight:700">Pagamento aprovado!</h3>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:24px">Sua conta agora &eacute; <strong>Premium Vital&iacute;cio</strong>. Aproveite sem limites!</p>
+      <button class="btn-pix" onclick="closeModal()">Come&ccedil;ar a usar</button>
+    </div>
+
+    
+    <div id="modal-error" style="display:none;text-align:center;padding:20px 0">
+      <div class="pay-icon pay-icon-err">&#10005;</div>
+      <h3 style="margin:18px 0 8px;font-size:1.15rem;font-weight:700">Pagamento n&atilde;o conclu&iacute;do</h3>
+      <p id="modal-error-msg" style="color:var(--muted);font-size:.85rem;margin-bottom:24px">Verifique os dados e tente novamente.</p>
+      <button class="btn-pix" style="margin-bottom:8px" onclick="showPixForm()">Tentar novamente</button>
+      <button class="btn-close-modal" onclick="closeModal()">Fechar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Cancel Confirm Modal -->
+<div id="cancel-overlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(15,23,42,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px">
+  <div id="cancel-box-confirm" style="background:#fff;border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.2);text-align:center">
+    <div style="width:58px;height:58px;border-radius:50%;background:#FEF3C7;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.6rem">&#9888;</div>
+    <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:10px;color:var(--text)">Cancelar assinatura?</h3>
+    <p id="cc-main-msg" style="color:var(--muted);font-size:.875rem;line-height:1.7;margin-bottom:28px"></p>
+    <div style="display:flex;gap:10px">
+      <button onclick="closeCancelOverlay()" style="flex:1;padding:12px;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-family:inherit;font-size:.875rem;font-weight:600;cursor:pointer;color:var(--text)">Manter Premium</button>
+      <button onclick="confirmCancelOk()" style="flex:1;padding:12px;border:none;border-radius:10px;background:#DC2626;color:#fff;font-family:inherit;font-size:.875rem;font-weight:700;cursor:pointer">Sim, cancelar</button>
+    </div>
+  </div>
+  <div id="cancel-box-loading" style="display:none;background:#fff;border-radius:20px;padding:44px 32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.2);text-align:center">
+    <div class="pay-spinner" style="margin:0 auto 18px"></div>
+    <p style="color:var(--muted);font-size:.9rem;margin:0">Cancelando assinatura...</p>
+  </div>
+  <div id="cancel-box-done" style="display:none;background:#fff;border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.2);text-align:center">
+    <div class="pay-icon pay-icon-ok" style="margin-bottom:16px">&#10003;</div>
+    <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:8px;color:var(--text)">Assinatura cancelada</h3>
+    <p id="cc-done-msg" style="color:var(--muted);font-size:.875rem;line-height:1.7;margin-bottom:28px"></p>
+    <button onclick="closeCancelOverlay()" style="width:100%;padding:12px;background:var(--text);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer">OK, entendi</button>
+  </div>
+  <div id="cancel-box-err" style="display:none;background:#fff;border-radius:20px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 24px 64px rgba(15,23,42,.2);text-align:center">
+    <div class="pay-icon pay-icon-err" style="margin-bottom:16px">&#10005;</div>
+    <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:8px;color:var(--text)">Erro ao cancelar</h3>
+    <p id="cc-err-msg" style="color:var(--muted);font-size:.875rem;margin-bottom:28px">Tente novamente.</p>
+    <button onclick="closeCancelOverlay()" style="width:100%;padding:12px;background:var(--text);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer">Fechar</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Transcri&ccedil;&atilde;o <em>Universal</em></div>
+  <p class="footer-txt">&copy; 2026 &mdash; Transcreva qualquer v&iacute;deo com precis&atilde;o.</p>
+</footer>
+
+<script>
+const API = ((['localhost','127.0.0.1'].includes(location.hostname)) && location.port !== '3000') ? 'http://localhost:3000' : '';
+let transcript = '', allSegs = [], timer = null;
+let lastJobStarted = false;
+
+const LIMIT_ANON = 1, LIMIT_FREE = 3, LIMIT_PREMIUM = 100;
+function getUser()   { try { return JSON.parse(localStorage.getItem('tu_user')||'null'); } catch { return null; } }
+function isPremium() { return localStorage.getItem('tu_premium')==='1'; }
+function todayStr()  { return new Date().toISOString().slice(0,10); }
+function getUsage()  {
+  const r = localStorage.getItem('tu_usage');
+  if (!r) return {date:todayStr(),count:0};
+  try { const d=JSON.parse(r); return d.date===todayStr() ? d : {date:todayStr(),count:0}; } catch { return {date:todayStr(),count:0}; }
+}
+function getToken()  { return localStorage.getItem('tu_token') || null; }
+function authHeader(){ const t=getToken(); return t ? { 'Authorization': 'Bearer '+t } : {}; }
+function getLimit()  { return isPremium() ? LIMIT_PREMIUM : getUser() ? LIMIT_FREE : LIMIT_ANON; }
+function canTranscribe() { return getUsage().count < getLimit(); }
+
+async function loadUsage() {
+  const token = getToken();
+  if (!token) return;
+  try {
+    const mr = await fetch(API+'/api/me', { headers: authHeader() });
+    if (mr.status === 401) { logout(); return; }
+    if (mr.ok) {
+      const md = await mr.json();
+      localStorage.setItem('tu_user', JSON.stringify({ id: md.user.id, name: md.user.name, email: md.user.email }));
+      localStorage.setItem('tu_premium', md.user.is_premium ? '1' : '0');
+      localStorage.setItem('tu_premium_until', md.user.next_billing_date || '');
+      localStorage.setItem('tu_sub_cancelled', md.user.subscription_cancelled ? '1' : '0');
+      if (md.user.payment_method) localStorage.setItem('tu_payment_method', md.user.payment_method);
+    }
+    const ur = await fetch(API+'/api/usage', { headers: authHeader() });
+    if (ur.ok) {
+      const ud = await ur.json();
+      const today = todayStr();
+      localStorage.setItem('tu_usage', JSON.stringify({ date: today, count: ud.count }));
+    }
+  } catch {}
+}
+
+async function incUsage() {
+  const u = getUsage(); u.count++; localStorage.setItem('tu_usage', JSON.stringify(u));
+  const token = getToken();
+  if (token) {
+    try { await fetch(API+'/api/usage/inc', { method:'POST', headers: authHeader() }); } catch {}
+  }
+}
+
+async function decUsage() {
+  const u = getUsage(); u.count = Math.max(0, u.count-1); localStorage.setItem('tu_usage', JSON.stringify(u));
+  const token = getToken();
+  if (token) {
+    try { await fetch(API+'/api/usage/dec', { method:'POST', headers: authHeader() }); } catch {}
+  }
+}
+
+function updateNav() {
+  const user = getUser();
+  const nr = document.getElementById('nav-right');
+  if (user) {
+    const init = (user.name||user.email||'U')[0].toUpperCase();
+    const prem = isPremium();
+    const avatarCls = prem ? 'nav-avatar gold' : 'nav-avatar';
+    const nameCls   = prem ? 'nav-username gold' : 'nav-username';
+    nr.innerHTML =
+      '<a class="nav-link" href="#como-usar">Como usar</a>' +
+      (prem ? '' : '<button class="btn-nav-premium" onclick="openPremium()">Seja Premium</button>') +
+      '<button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"></button>' +
+      '<div class="nav-profile" id="nav-profile">' +
+        '<button class="nav-avatar-btn" onclick="toggleProfile(event)">' +
+          '<div class="'+avatarCls+'">'+init+'</div>' +
+          '<span class="'+nameCls+'">'+(user.name||user.email)+'</span>' +
+        '</button>' +
+        '<div class="profile-drop" id="profile-drop" style="display:none"></div>' +
+      '</div>';
+    renderProfileDrop(user);
+    updateThemeIcon();
+    updatePromoVisibility();
+  } else {
+    nr.innerHTML =
+      '<a class="nav-link" href="#como-usar">Como usar</a>' +
+      (isPremium() ? '' : '<button class="btn-nav-premium" onclick="openPremium()">Seja Premium</button>') +
+      '<button class="btn-nav-login" onclick="goLogin()">Entrar</button>' +
+      '<button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"></button>';
+    updateThemeIcon();
+  }
+  buildMobileMenu();
+}
+
+function buildMobileMenu() {
+  const mm = document.getElementById('mobile-menu');
+  if (!mm) return;
+  const user = getUser();
+  const prem = isPremium();
+  const themeLabel = document.documentElement.getAttribute('data-theme') === 'dark' ? 'Tema claro' : 'Tema escuro';
+  const themeIcon = document.documentElement.getAttribute('data-theme') === 'dark'
+    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    : '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+  if (user) {
+    const init = (user.name||user.email||'U')[0].toUpperCase();
+    const avatarStyle = prem ? 'background:var(--gold)' : '';
+    const u = getUsage(); const lim = getLimit(); const left = Math.max(0, lim - u.count);
+    mm.innerHTML =
+      '<div class="mm-user">' +
+        '<div class="nav-avatar" style="'+avatarStyle+'">'+init+'</div>' +
+        '<div><div class="mm-user-name">'+(user.name||'Usu\u00e1rio')+'</div><div class="mm-user-info">'+(user.email||'')+' \u00b7 '+left+'/'+lim+' cr\u00e9ditos</div></div>' +
+      '</div>' +
+      '<div class="mm-divider"></div>' +
+      (prem ? '' : '<button class="mm-item accent" onclick="openPremium();closeMobileMenu()"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Seja Premium</button>') +
+      '<a class="mm-item" href="#como-usar" onclick="closeMobileMenu()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Como usar</a>' +
+      '<button class="mm-item" onclick="toggleTheme();buildMobileMenu()">'+themeIcon+themeLabel+'</button>' +
+      '<div class="mm-divider"></div>' +
+      '<button class="mm-item danger" onclick="logout();closeMobileMenu()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</button>';
+  } else {
+    mm.innerHTML =
+      '<button class="mm-item" onclick="goLogin();closeMobileMenu()"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Entrar</button>' +
+      (prem ? '' : '<button class="mm-item accent" onclick="openPremium();closeMobileMenu()"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Seja Premium</button>') +
+      '<a class="mm-item" href="#como-usar" onclick="closeMobileMenu()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Como usar</a>' +
+      '<button class="mm-item" onclick="toggleTheme();buildMobileMenu()">'+themeIcon+themeLabel+'</button>';
+  }
+}
+
+function toggleMobileMenu() {
+  const mm = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger-btn');
+  if (mm.classList.contains('open')) {
+    closeMobileMenu();
+  } else {
+    buildMobileMenu();
+    mm.classList.add('open');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  }
+}
+
+function closeMobileMenu() {
+  const mm = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger-btn');
+  if (mm) mm.classList.remove('open');
+  if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+}
+
+function renderProfileDrop(user) {
+  const el = document.getElementById('profile-drop');
+  if (!el) return;
+  const init = (user.name||user.email||'U')[0].toUpperCase();
+  const u    = getUsage();
+  const lim  = getLimit();
+  const left = Math.max(0, lim - u.count);
+  const pct  = lim > 0 ? Math.round((left / lim) * 100) : 0;
+  const prem = isPremium();
+  const avatarStyle = prem ? 'background:var(--gold)' : '';
+
+  let statusBlock = '';
+  if (prem) {
+    statusBlock = '<div class="pd-cancel-notice" style="border-color:var(--green);background:rgba(34,197,94,.06)">&#9989;&nbsp;<strong style="color:var(--green)">Premium Vital&iacute;cio.</strong> Acesso liberado para sempre.</div>';
+  } else {
+    statusBlock = '<button class="pd-btn pd-btn-up" onclick="openPremium()">&#9889; Comprar Premium</button>';
+  }
+
+  el.innerHTML =
+    '<div class="pd-header">' +
+      '<div class="pd-avatar" style="'+avatarStyle+'">'+init+'</div>' +
+      '<div><div class="pd-name">'+(user.name||'Usu&aacute;rio')+'</div><div class="pd-email">'+(user.email||'')+'</div></div>' +
+    '</div>' +
+    '<div class="pd-body">' +
+      '<div class="pd-row">' +
+        '<span class="pd-row-label">Plano</span>' +
+        '<span class="pd-badge '+(prem?'prem':'free')+'">'+(prem?'&#9733; Premium':'Gratuito')+'</span>' +
+      '</div>' +
+      '<div class="pd-credits-block">' +
+        '<div class="pd-credits-top"><span>Cr&eacute;ditos hoje</span><strong>'+left+' / '+lim+'</strong></div>' +
+        '<div class="pd-bar"><div class="pd-bar-fill" style="width:'+pct+'%"></div></div>' +
+      '</div>' +
+      '<div class="pd-btns">' +
+        statusBlock +
+        '<button class="pd-btn pd-btn-out" onclick="logout()">Sair da conta</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function toggleProfile(e) {
+  e.stopPropagation();
+  const d = document.getElementById('profile-drop');
+  if (!d) return;
+  if (d.style.display !== 'none') { d.style.display = 'none'; return; }
+  renderProfileDrop(getUser());
+  d.style.display = 'block';
+}
+
+document.addEventListener('click', function() {
+  const d = document.getElementById('profile-drop');
+  if (d) d.style.display = 'none';
+});
+
+function updateUsageInfo() {
+  const el = document.getElementById('usage-row');
+  const u = getUsage(), lim = getLimit(), user = getUser();
+  const left = Math.max(0, lim - u.count);
+  if (!user)
+    el.innerHTML = '<span class="usage-pill">'+left+'/'+lim+' transcri&ccedil;&atilde;o gratuita &mdash; <a href="/login.html" style="color:var(--accent);text-decoration:none;font-weight:600">Entrar para mais</a></span>';
+  else
+    el.innerHTML = '<span class="usage-pill"><b>'+left+'/'+lim+'</b> restantes hoje</span>';
+  const d = document.getElementById('profile-drop');
+  if (d && d.style.display !== 'none') renderProfileDrop(getUser());
+}
+
+function goLogin()  { window.location.href='/login.html'; }
+function logout()   {
+  ['tu_user','tu_token','tu_premium','tu_usage','tu_premium_until','tu_sub_cancelled'].forEach(k=>localStorage.removeItem(k));
+  window.location.href='/login.html?lo=1';
+}
+let _cancelConfirmOk = null;
+
+function closeCancelOverlay() {
+  document.getElementById('cancel-overlay').style.display = 'none';
+  _cancelConfirmOk = null;
+}
+
+function _cancelShowBox(which) {
+  ['confirm','loading','done','err'].forEach(s => {
+    document.getElementById('cancel-box-'+s).style.display = s === which ? 'block' : 'none';
+  });
+}
+
+function confirmCancelOk() {
+  _cancelShowBox('loading');
+  if (_cancelConfirmOk) _cancelConfirmOk();
+}
+
+async function cancelSub() {
+  let nextBillingDate = null;
+  try {
+    const r = await fetch(API+'/api/me', { headers: authHeader() });
+    if (r.ok) { const d = await r.json(); nextBillingDate = d.user.next_billing_date || null; }
+  } catch {}
+
+  let confirmMsg;
+  if (nextBillingDate) {
+    const fmtDate = new Date(nextBillingDate).toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+    confirmMsg = 'Você mantém todos os benefícios Premium até '+fmtDate+'. Após essa data, sua conta volta para o plano gratuito e não haverá mais cobranças.';
+  } else {
+    confirmMsg = 'Seu acesso Premium será encerrado imediatamente e não haverá mais cobranças.';
+  }
+
+  document.getElementById('cc-main-msg').textContent = confirmMsg;
+  _cancelShowBox('confirm');
+  document.getElementById('cancel-overlay').style.display = 'flex';
+
+  _cancelConfirmOk = async function() {
+    try {
+      const r = await fetch(API+'/api/cancel', { method:'POST', headers:{...authHeader(),'Content-Type':'application/json'} });
+      const d = await r.json();
+      if (d.token) {
+        localStorage.setItem('tu_token', d.token);
+        localStorage.setItem('tu_premium', '1');
+        localStorage.setItem('tu_sub_cancelled', '1');
+        if (d.next_billing_date) localStorage.setItem('tu_premium_until', d.next_billing_date);
+        const pd = document.getElementById('profile-drop');
+        if (pd) pd.style.display = 'none';
+        updateNav(); updateUsageInfo();
+        let doneMsg = 'Sua assinatura foi cancelada com sucesso.';
+        if (d.next_billing_date) {
+          const fmtDate = new Date(d.next_billing_date).toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
+          doneMsg = 'Assinatura cancelada. Você continua Premium até '+fmtDate+'. Após essa data, voltará automaticamente ao plano gratuito.';
+        }
+        document.getElementById('cc-done-msg').textContent = doneMsg;
+        _cancelShowBox('done');
+      } else {
+        document.getElementById('cc-err-msg').textContent = d.error || 'Tente novamente.';
+        _cancelShowBox('err');
+      }
+    } catch {
+      document.getElementById('cc-err-msg').textContent = 'Erro de conexão. Tente novamente.';
+      _cancelShowBox('err');
+    }
+  };
+}
+
+async function pasteUrl() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('url').value = text;
+    document.getElementById('url').focus();
+  } catch { document.getElementById('url').focus(); }
+}
+
+function hide(...ids) { ids.forEach(id=>{ const e=document.getElementById(id); if(e) e.style.display='none'; }); }
+function show(id,d='block') { const e=document.getElementById(id); if(e) e.style.display=d; }
+
+function setSteps(active) {
+  ['s1','s2'].forEach(id=>document.getElementById(id).className='step');
+  document.getElementById('s1i').innerHTML='&#8595;';
+  document.getElementById('s2i').innerHTML='&#9670;';
+  if (active==='s1') {
+    document.getElementById('s1').className='step on';
+    document.getElementById('s1i').innerHTML='<div class="s-spin"></div>';
+  } else if (active==='s2') {
+    document.getElementById('s1').className='step done'; document.getElementById('s1i').innerHTML='&#10003;';
+    document.getElementById('s2').className='step on';   document.getElementById('s2i').innerHTML='<div class="s-spin"></div>';
+  } else if (active==='done') {
+    document.getElementById('s1').className='step done'; document.getElementById('s1i').innerHTML='&#10003;';
+    document.getElementById('s2').className='step done'; document.getElementById('s2i').innerHTML='&#10003;';
+  }
+}
+
+function resetErr() {
+  hide('err-sec');
+  document.getElementById('url').focus();
+}
+
+async function go() {
+  const url = document.getElementById('url').value.trim();
+  if (!url) { document.getElementById('url').focus(); return; }
+  if (!canTranscribe()) { showLimitWall(); return; }
+
+  clearInterval(timer);
+  lastJobStarted = false;
+  hide('prog','err-sec','res-sec','limit-wall');
+  show('prog'); setSteps('s1');
+  document.getElementById('btn-go').disabled = true;
+
+  try {
+    const r = await fetch(API+'/transcribe', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({url})
+    });
+    const d = await r.json();
+    if (!d.job_id) throw new Error('invalid');
+    lastJobStarted = true;
+    await incUsage();
+    updateUsageInfo();
+    timer = setInterval(()=>poll(d.job_id), 900);
+  } catch(e) {
+    showErr('Não foi possível conectar ao servidor. Verifique se ele está rodando.');
+  }
+}
+
+async function poll(id) {
+  try {
+    const r = await fetch(API+'/status/'+id);
+    const d = await r.json();
+    if      (d.status==='queued')      { setSteps('s1'); document.getElementById('s1sub').textContent='Na fila...'; }
+    else if (d.status==='subtitles')   { setSteps('s1'); document.getElementById('s1sub').textContent='Buscando legendas...'; }
+    else if (d.status==='downloading') { setSteps('s1'); document.getElementById('s1sub').textContent='Baixando áudio...'; }
+    else if (d.status==='transcribing'){ setSteps('s2'); }
+    else if (d.status==='done')  { clearInterval(timer); setSteps('done'); setTimeout(()=>showRes(d),300); }
+    else if (d.status==='error') {
+      clearInterval(timer);
+      await decUsage();
+      updateUsageInfo();
+      showErr(d.message);
+    }
+  } catch { clearInterval(timer); showErr('Erro de conexão com o servidor.'); }
+}
+
+function showErr(msg) {
+  hide('prog');
+  document.getElementById('err-msg').textContent = msg || 'Tente novamente com um link válido e público.';
+  const el = document.getElementById('err-sec');
+  el.style.display = 'flex';
+  document.getElementById('btn-go').disabled = false;
+}
+
+function showLimitWall() {
+  const user = getUser();
+  hide('prog','err-sec','res-sec');
+  const title = document.getElementById('limit-title');
+  const desc    = document.getElementById('limit-desc');
+  const actions = document.getElementById('limit-actions');
+  if (!user) {
+    title.textContent = 'Transcrição gratuita utilizada';
+    desc.innerHTML = 'Crie uma conta gratuita para ter <strong>3 transcrições por dia</strong>.';
+    actions.innerHTML =
+      '<button class="btn-limit btn-limit-login" onclick="goLogin()">Criar conta &mdash; 3 por dia gr&aacute;tis</button>' +
+      '<div class="limit-divider"><span>ou</span></div>' +
+      '<button class="btn-limit btn-limit-premium" onclick="openPremium()">Comprar Premium &mdash; 100/dia para sempre</button>';
+  } else {
+    title.textContent = 'Limite diário atingido';
+    desc.innerHTML = 'Você usou suas 3 transcrições gratuitas de hoje.';
+    actions.innerHTML =
+      '<button class="btn-limit btn-limit-premium" onclick="openPremium()">Comprar Premium &mdash; 100 cr&eacute;ditos/dia para sempre</button>';
+  }
+  show('limit-wall');
+  document.getElementById('btn-go').disabled = false;
+}
+
+function showRes(d) {
+  transcript = d.transcript||'';
+  allSegs = d.segments||[];
+  hide('prog','err-sec','limit-wall');
+  show('res-sec');
+  document.getElementById('btn-go').disabled = false;
+  document.getElementById('txt-full').textContent = transcript;
+  document.getElementById('badge-words').textContent = (d.wordCount||0)+' palavras';
+  const bl = document.getElementById('badge-lang');
+  const LANGS={pt:'PT',en:'EN',es:'ES',fr:'FR',de:'DE',it:'IT',ja:'JA',ko:'KO',zh:'ZH',ar:'AR',ru:'RU'};
+  if (d.language){ bl.textContent=LANGS[d.language]||d.language.toUpperCase(); bl.style.display='inline-flex'; }
+  else bl.style.display='none';
+  const sl = document.getElementById('seg-list');
+  sl.innerHTML='';
+  allSegs.forEach(s=>{
+    const div=document.createElement('div'); div.className='seg';
+    div.innerHTML='<span class="seg-time">'+fmt(s.start)+'</span><span class="seg-txt">'+esc(s.text)+'</span>';
+    sl.appendChild(div);
+  });
+  switchTab('text');
+}
+
+function switchTab(t) {
+  document.getElementById('tab-text').className='tab'+(t==='text'?' on':'');
+  document.getElementById('tab-ts').className='tab'+(t==='ts'?' on':'');
+  document.getElementById('pane-text').className='tab-pane'+(t==='text'?' on':'');
+  document.getElementById('pane-ts').className='tab-pane'+(t==='ts'?' on':'');
+}
+
+function fmt(s){ const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?h+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0'):m+':'+String(sec).padStart(2,'0'); }
+function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function cp() {
+  navigator.clipboard.writeText(transcript).then(()=>{
+    const b=document.getElementById('btn-copy'); const old=b.innerHTML;
+    b.innerHTML='Copiado'; setTimeout(()=>b.innerHTML=old,1500);
+  });
+}
+function dl() {
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([transcript],{type:'text/plain;charset=utf-8'}));
+  a.download='transcricao.txt'; a.click();
+}
+
+function modalStep(step) {
+  ['plan','pix','loading','success','error'].forEach(s => {
+    const el = document.getElementById('modal-'+s);
+    if (el) el.style.display = s === step ? '' : 'none';
+  });
+}
+
+function openPremium() {
+  modalStep('plan');
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  stopPixPolling();
+  setTimeout(() => modalStep('plan'), 300);
+}
+
+let _pixPollTimer = null;
+let _pixPaymentId = null;
+
+function stopPixPolling() {
+  if (_pixPollTimer) { clearInterval(_pixPollTimer); _pixPollTimer = null; }
+}
+
+async function showPixForm() {
+  const user = getUser();
+  if (!user) { closeModal(); goLogin(); return; }
+  stopPixPolling();
+  _pixPaymentId = null;
+  modalStep('pix');
+  document.getElementById('pix-loading').style.display = 'block';
+  document.getElementById('pix-content').style.display = 'none';
+  document.getElementById('pix-error').style.display = 'none';
+  try {
+    const r = await fetch(API + '/api/pix', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() } });
+    const d = await r.json();
+    if (!r.ok || !d.payment_id) throw new Error(d.error || 'Erro ao gerar PIX.');
+    _pixPaymentId = d.payment_id;
+    document.getElementById('pix-loading').style.display = 'none';
+    document.getElementById('pix-content').style.display = 'block';
+    document.getElementById('pix-qr-img').src = d.qr_code_base64
+      ? 'data:image/png;base64,' + d.qr_code_base64 : '';
+    document.getElementById('pix-code-field').value = d.qr_code || '';
+    document.getElementById('pix-status-msg').textContent = 'Aguardando pagamento...';
+    // Auto-poll every 5s
+    _pixPollTimer = setInterval(checkPixNow, 5000);
+  } catch(e) {
+    document.getElementById('pix-loading').style.display = 'none';
+    document.getElementById('pix-error').style.display = 'block';
+    document.getElementById('pix-error-msg').textContent = e.message || 'Erro ao gerar PIX.';
+  }
+}
+
+async function checkPixNow() {
+  if (!_pixPaymentId) return;
+  try {
+    const r = await fetch(API + '/api/check-payment/' + _pixPaymentId, { headers: authHeader() });
+    const d = await r.json();
+    if (d.status === 'approved') {
+      stopPixPolling();
+      localStorage.setItem('tu_premium', '1');
+      if (d.token) localStorage.setItem('tu_token', d.token);
+      if (d.user) localStorage.setItem('tu_user', JSON.stringify(d.user));
+      localStorage.setItem('tu_payment_method', d.payment_method || 'pix');
+      localStorage.setItem('tu_usage', JSON.stringify({ date: todayStr(), count: 0 }));
+      updateNav(); updateUsageInfo();
+      modalStep('success');
+    } else if (d.status === 'pending') {
+      document.getElementById('pix-status-msg').textContent = 'Aguardando pagamento...';
+    } else {
+      stopPixPolling();
+      document.getElementById('pix-error-msg').textContent = d.message || 'PIX expirou ou foi recusado.';
+      document.getElementById('pix-error').style.display = 'block';
+      document.getElementById('pix-content').style.display = 'none';
+    }
+  } catch { document.getElementById('pix-status-msg').textContent = 'Verificando...'; }
+}
+
+function copyPixCode() {
+  const code = document.getElementById('pix-code-field').value;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.btn-pix-copy');
+    if (btn) { btn.textContent = 'Copiado!'; setTimeout(() => { btn.innerHTML = '&#128203; Copiar c&oacute;digo PIX'; }, 2000); }
+  }).catch(() => {
+    document.getElementById('pix-code-field').select();
+    document.execCommand('copy');
+  });
+}
+
+function updatePromoVisibility() {
+  const prem = isPremium();
+  const promo = document.getElementById('premium-promo');
+  const thanks = document.getElementById('premium-thanks');
+  if (promo) promo.style.display = prem ? 'none' : '';
+  if (thanks) thanks.style.display = prem ? 'block' : 'none';
+}
+
+(async function init() {
+  // Dark mode init
+  updateThemeIcon();
+  await loadUsage();
+  updateNav();
+  updateUsageInfo();
+  updatePromoVisibility();
+  if (!canTranscribe()) showLimitWall();
+  if (new URLSearchParams(location.search).get('premium') === '1') openPremium();
+  window.addEventListener('scroll', function() {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+})();
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('tu_theme', isDark ? 'light' : 'dark');
+  updateThemeIcon();
+}
+function updateThemeIcon() {
+  var btn = document.querySelector('.theme-toggle');
+  if (!btn) return;
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark
+    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    : '<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+}
+</script>
+</body>
+</html>
