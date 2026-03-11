@@ -67,6 +67,8 @@ nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid va
   .box-sub{font-size:.8rem}
   .tab-auth{font-size:.82rem;padding:8px 4px}
   .field label{font-size:.75rem}
+  .btn-nav-premium{display:none}
+  #box-sub{display:none}
 }
 /* ── Dark Mode ── */
 html[data-theme="dark"]{
@@ -102,9 +104,6 @@ html[data-theme="dark"]{
     Transcri&ccedil;&atilde;o<em>Universal</em>
   </a>
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="nav-right" id="nav-right">
-      <button class="btn-nav-premium" onclick="window.location.href='/?premium=1'">Seja Premium</button>
-    </div>
     <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"></button>
   </div>
 </nav>
@@ -112,7 +111,6 @@ html[data-theme="dark"]{
 <div class="center">
   <div class="box">
     <h1 class="box-title" id="box-title">Entrar na sua conta</h1>
-    <p class="box-sub" id="box-sub">Acesse 3 transcri&ccedil;&otilde;es gratuitas por dia ou compre o <strong>Premium</strong> &mdash; acesso vital&iacute;cio</p>
 
     <button class="btn-google" id="btn-google" onclick="loginGoogle()">
       <svg width="18" height="18" viewBox="0 0 48 48">
