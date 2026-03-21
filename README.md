@@ -13,7 +13,6 @@ Basta colar o link. Nada para instalar. Funciona no navegador.
 
 </div>
 
----
 
 ## O que faz
 
@@ -22,15 +21,12 @@ Basta colar o link. Nada para instalar. Funciona no navegador.
 - O texto aparece na tela — pronto para copiar
 - Plano gratuito com limite diário; **Premium** sem limites por PIX (R$5,00/mês)
 
----
-
 ## Funcionalidades
 
 | | Gratuito | Premium |
 |---|:---:|:---:|
 | Transcrição (YouTube / TikTok / Instagram / Twitter) | ✅ | ✅ |
 | Limite diário | 3/dia | Ilimitado |
-| Sem anúncios | ❌ | ✅ |
 | Cancelar / excluir conta a qualquer hora | ✅ | ✅ |
 
 - Cadastro e login por e-mail + Google OAuth
@@ -38,8 +34,6 @@ Basta colar o link. Nada para instalar. Funciona no navegador.
 - Pagamento via PIX com ativação automática (MercadoPago)
 - Exclusão de conta com confirmação de senha
 - Interface 100% responsiva — celular e desktop
-
----
 
 ## Tecnologias
 
@@ -52,8 +46,6 @@ Basta colar o link. Nada para instalar. Funciona no navegador.
 | Pagamentos | MercadoPago (PIX) |
 | E-mail | Nodemailer (Gmail SMTP) |
 | Frontend | HTML + CSS + JavaScript puro |
-
----
 
 ## Como rodar
 
@@ -79,8 +71,6 @@ Abra **http://localhost:3000** no navegador. Pronto.
 
 > O arquivo `.env` já vem configurado no repositório com todas as chaves necessárias.  
 > Não precisa criar conta em nenhum serviço — os pagamentos vão diretamente para o desenvolvedor.
-
----
 
 ## Estrutura
 
